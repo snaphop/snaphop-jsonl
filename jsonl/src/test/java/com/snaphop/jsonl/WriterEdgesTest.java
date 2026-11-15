@@ -303,6 +303,13 @@ class WriterEdgesTest {
 		assertThrows(JsonException.class, () -> JsonWriter.ofBytes().value(Double.NEGATIVE_INFINITY));
 		assertThrows(JsonException.class, () -> Json.write(new java.util.concurrent.atomic.AtomicLong(1)));
 		assertEquals("Can't write a java.lang.Object as JSON", assertThrows(JsonException.class, () -> Json.write(new Object())).getMessage());
+		// No form chosen for the caller: convert first, or use JsonWritable.
+		assertEquals("Can't write a java.util.UUID as JSON",
+				assertThrows(JsonException.class, () -> Json.write(java.util.UUID.randomUUID())).getMessage());
+		assertThrows(JsonException.class, () -> Json.write(java.time.Instant.EPOCH));
+		assertThrows(JsonException.class, () -> Json.write(java.util.Optional.empty()));
+		var id = java.util.UUID.fromString("00000000-0000-0000-0000-000000000001");
+		assertEquals("[\"00000000-0000-0000-0000-000000000001\"]", Json.write(List.of((JsonWritable) w -> w.value(id.toString()))));
 	}
 
 }

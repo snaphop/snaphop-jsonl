@@ -50,8 +50,10 @@ public final class Json {
 	}
 
 	/// Writes a value as JSON.
-	/// @param value as [JsonWriter#value(Object)] takes.
+	/// @param value as [JsonWriter#value(Object)] takes: other types, such as a `UUID`
+	///   or a `java.time` value, must be converted first.
 	/// @return the JSON.
+	/// @throws JsonException for a value it doesn't take.
 	public static String write(@Nullable Object value) {
 		return JsonWriter.ofBytes().value(value).toString();
 	}

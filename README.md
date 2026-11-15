@@ -123,6 +123,42 @@ Writing this prototype hit a bug of exactly this kind. A number's start was take
 before the refill that moves it, and the byte-at-a-time test caught it the first time
 it ran.
 
+## Moving from avaje
+
+| avaje | jsonl |
+|---|---|
+| `Jsonb.builder().serializeNulls(true).build().type(Object.class)`: `fromJson`, `toJson` | `Json.read`, `Json.write`, `Json.writeBytes` |
+| `JsonStream.reader(...)` | `JsonReader.of(...)` |
+| `currentToken()` | `peek()` |
+| `beginObject()` / `hasNextField()` / `nextField()` | `beginObject()` / `hasNext()` / `nextName()` |
+| `beginArray()` / `hasNextElement()` | `beginArray()` / `hasNext()` |
+| `beginStream()` / `hasNextStreamElement()` | `hasNext()` outside any array or object |
+| `isNullValue()` | `nextIfNull()` |
+| `readString`, `readLong`, `readDouble`, `readBoolean`, `readDecimal` | `nextString`, `nextLong`, `nextDouble`, `nextBoolean`, `nextBigDecimal` |
+| `readRaw()` | `readRaw()` or `readRawBytes()` |
+| `JsonStream.bufferedWriterAsBytes()` | `JsonWriter.ofBytes()` |
+| `serializeNulls(true)` | always: nulls are always written |
+| `jsonb.parserMaxStringBuffer` | nothing to set |
+
+There is no binding. A `@Json` class stays with avaje, or writes itself through
+`JsonWritable`.
+
+Where the two differ (checked with avaje 3.16):
+
+| | avaje | jsonl |
+|---|---|---|
+| Read `1.0`, `1e3` | `Long` 1, 1000 | `Double` 1.0, 1000.0: a fraction or exponent makes a double, so an `instanceof Long` check on a value a client may write as `5.0` changes |
+| Read `12345678901234567890` | `Long` 9223372036854775807, silently clamped | `BigInteger` |
+| Read `40.03362634200912` | 40.033626342009114 | 40.03362634200912, correctly rounded |
+| Read `{"a":1} x` | `{a=1}`, the trailing text ignored | an error naming the line and column; `JsonReader` reads one value after another, as JSON lines has them |
+| Read `{"a":1,"a":2}` | an error | `{a=2}`: the last wins, as in PostgreSQL's jsonb and Dart's `jsonDecode` |
+| Read a tab inside a string | the tab | an error: JSON wants it escaped |
+| Read `"\ud800"`, a lone surrogate | `?` | U+FFFD |
+| Write a lone surrogate | an error | U+FFFD |
+| Write `NaN` or an infinity | the string `"NaN"` | an error: JSON has no such numbers |
+| Write `-0.0` | `0.0` | `-0.0` |
+| Write a `UUID`, an `Instant`, an `Optional` | a string, a string, `null` | an error: convert it first, so its form is your choice, not the library's |
+
 ## Testing
 
 `./mvnw install` runs 373 tests in about 5 seconds:

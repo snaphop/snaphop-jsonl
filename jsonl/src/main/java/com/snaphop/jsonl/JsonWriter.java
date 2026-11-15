@@ -206,8 +206,14 @@ public final class JsonWriter implements AutoCloseable, Flushable {
 
 	/// Writes a value of a tree: a map (keys as strings), list, other iterable, array of
 	/// objects, string, number, boolean, [JsonWritable] or `null`.
+	///
+	/// Anything else, such as a `UUID`, an `Instant` or an `Optional`, throws rather
+	/// than being given a form here: convert it first, to a string say, or wrap it in a
+	/// [JsonWritable], so that its JSON is the caller's choice.
 	/// @param value the value.
 	/// @return this.
+	/// @throws JsonException for a value of another type, or a double that isn't
+	///   finite.
 	public JsonWriter value(@Nullable Object value) {
 		switch (value) {
 			case null -> nullValue();
