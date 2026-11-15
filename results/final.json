@@ -1,0 +1,4450 @@
+[
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.LinesRead.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "primaryMetric" : {
+            "score" : 37.16518548296296,
+            "scoreError" : 1.3276010967318201,
+            "scoreConfidence" : [
+                35.83758438623114,
+                38.49278657969478
+            ],
+            "scorePercentiles" : {
+                "0.0" : 36.78177603636364,
+                "50.0" : 37.03400478181818,
+                "90.0" : 37.65130875925926,
+                "95.0" : 37.65130875925926,
+                "99.0" : 37.65130875925926,
+                "99.9" : 37.65130875925926,
+                "99.99" : 37.65130875925926,
+                "99.999" : 37.65130875925926,
+                "99.9999" : 37.65130875925926,
+                "100.0" : 37.65130875925926
+            },
+            "scoreUnit" : "ms/op",
+            "rawData" : [
+                [
+                    36.78177603636364,
+                    37.65130875925926,
+                    36.98635978181818,
+                    37.03400478181818,
+                    37.372478055555554
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.LinesRead.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "primaryMetric" : {
+            "score" : 30.961150596895397,
+            "scoreError" : 0.9677950637000369,
+            "scoreConfidence" : [
+                29.99335553319536,
+                31.928945660595435
+            ],
+            "scorePercentiles" : {
+                "0.0" : 30.66867971212121,
+                "50.0" : 30.967758215384617,
+                "90.0" : 31.319817703125,
+                "95.0" : 31.319817703125,
+                "99.0" : 31.319817703125,
+                "99.9" : 31.319817703125,
+                "99.99" : 31.319817703125,
+                "99.999" : 31.319817703125,
+                "99.9999" : 31.319817703125,
+                "100.0" : 31.319817703125
+            },
+            "scoreUnit" : "ms/op",
+            "rawData" : [
+                [
+                    30.967758215384617,
+                    30.66867971212121,
+                    31.319817703125,
+                    31.058536846153846,
+                    30.790960507692308
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.LinesRead.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "primaryMetric" : {
+            "score" : 21.74127302764109,
+            "scoreError" : 1.8818419102437018,
+            "scoreConfidence" : [
+                19.85943111739739,
+                23.62311493788479
+            ],
+            "scorePercentiles" : {
+                "0.0" : 21.209805410526315,
+                "50.0" : 21.637669311827956,
+                "90.0" : 22.543324168539325,
+                "95.0" : 22.543324168539325,
+                "99.0" : 22.543324168539325,
+                "99.9" : 22.543324168539325,
+                "99.99" : 22.543324168539325,
+                "99.999" : 22.543324168539325,
+                "99.9999" : 22.543324168539325,
+                "100.0" : 22.543324168539325
+            },
+            "scoreUnit" : "ms/op",
+            "rawData" : [
+                [
+                    22.543324168539325,
+                    21.209805410526315,
+                    21.707405483870968,
+                    21.637669311827956,
+                    21.60816076344086
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.LinesRead.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "primaryMetric" : {
+            "score" : 17.105024129915847,
+            "scoreError" : 1.757190554005737,
+            "scoreConfidence" : [
+                15.34783357591011,
+                18.862214683921586
+            ],
+            "scorePercentiles" : {
+                "0.0" : 16.716070133333332,
+                "50.0" : 17.036458584745763,
+                "90.0" : 17.87972388392857,
+                "95.0" : 17.87972388392857,
+                "99.0" : 17.87972388392857,
+                "99.9" : 17.87972388392857,
+                "99.99" : 17.87972388392857,
+                "99.999" : 17.87972388392857,
+                "99.9999" : 17.87972388392857,
+                "100.0" : 17.87972388392857
+            },
+            "scoreUnit" : "ms/op",
+            "rawData" : [
+                [
+                    17.036458584745763,
+                    17.06159766101695,
+                    17.87972388392857,
+                    16.716070133333332,
+                    16.83127038655462
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.PullRead.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "primaryMetric" : {
+            "score" : 79.55003490769232,
+            "scoreError" : 0.5482643383887017,
+            "scoreConfidence" : [
+                79.00177056930362,
+                80.09829924608103
+            ],
+            "scorePercentiles" : {
+                "0.0" : 79.42528515384615,
+                "50.0" : 79.48925069230769,
+                "90.0" : 79.73548815384615,
+                "95.0" : 79.73548815384615,
+                "99.0" : 79.73548815384615,
+                "99.9" : 79.73548815384615,
+                "99.99" : 79.73548815384615,
+                "99.999" : 79.73548815384615,
+                "99.9999" : 79.73548815384615,
+                "100.0" : 79.73548815384615
+            },
+            "scoreUnit" : "ms/op",
+            "rawData" : [
+                [
+                    79.43294076923077,
+                    79.48925069230769,
+                    79.73548815384615,
+                    79.66720976923077,
+                    79.42528515384615
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.PullRead.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "primaryMetric" : {
+            "score" : 141.52782297333331,
+            "scoreError" : 0.8445899689141829,
+            "scoreConfidence" : [
+                140.68323300441912,
+                142.3724129422475
+            ],
+            "scorePercentiles" : {
+                "0.0" : 141.28149033333332,
+                "50.0" : 141.51648573333333,
+                "90.0" : 141.873412,
+                "95.0" : 141.873412,
+                "99.0" : 141.873412,
+                "99.9" : 141.873412,
+                "99.99" : 141.873412,
+                "99.999" : 141.873412,
+                "99.9999" : 141.873412,
+                "100.0" : 141.873412
+            },
+            "scoreUnit" : "ms/op",
+            "rawData" : [
+                [
+                    141.51648573333333,
+                    141.54840213333333,
+                    141.873412,
+                    141.28149033333332,
+                    141.41932466666665
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.PullRead.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "primaryMetric" : {
+            "score" : 70.99050591724138,
+            "scoreError" : 0.5210037862103502,
+            "scoreConfidence" : [
+                70.46950213103104,
+                71.51150970345172
+            ],
+            "scorePercentiles" : {
+                "0.0" : 70.82801024137932,
+                "50.0" : 71.04899810344827,
+                "90.0" : 71.13167513793104,
+                "95.0" : 71.13167513793104,
+                "99.0" : 71.13167513793104,
+                "99.9" : 71.13167513793104,
+                "99.99" : 71.13167513793104,
+                "99.999" : 71.13167513793104,
+                "99.9999" : 71.13167513793104,
+                "100.0" : 71.13167513793104
+            },
+            "scoreUnit" : "ms/op",
+            "rawData" : [
+                [
+                    71.04899810344827,
+                    70.82801024137932,
+                    71.07865182758621,
+                    71.13167513793104,
+                    70.86519427586207
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1k"
+        },
+        "primaryMetric" : {
+            "score" : 2.596484732062656,
+            "scoreError" : 0.04133007872417333,
+            "scoreConfidence" : [
+                2.555154653338483,
+                2.6378148107868293
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2.5819462603313252,
+                "50.0" : 2.594852136983849,
+                "90.0" : 2.6084796178983365,
+                "95.0" : 2.6084796178983365,
+                "99.0" : 2.6084796178983365,
+                "99.9" : 2.6084796178983365,
+                "99.99" : 2.6084796178983365,
+                "99.999" : 2.6084796178983365,
+                "99.9999" : 2.6084796178983365,
+                "100.0" : 2.6084796178983365
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    2.5917104608309853,
+                    2.605435184268785,
+                    2.594852136983849,
+                    2.6084796178983365,
+                    2.5819462603313252
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-100k"
+        },
+        "primaryMetric" : {
+            "score" : 142.17942517556352,
+            "scoreError" : 3.9593696350341787,
+            "scoreConfidence" : [
+                138.22005554052936,
+                146.1387948105977
+            ],
+            "scorePercentiles" : {
+                "0.0" : 141.03635448392555,
+                "50.0" : 142.2987191011236,
+                "90.0" : 143.33352464889654,
+                "95.0" : 143.33352464889654,
+                "99.0" : 143.33352464889654,
+                "99.9" : 143.33352464889654,
+                "99.99" : 143.33352464889654,
+                "99.999" : 143.33352464889654,
+                "99.9999" : 143.33352464889654,
+                "100.0" : 143.33352464889654
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    143.33352464889654,
+                    142.99964383757506,
+                    141.03635448392555,
+                    141.22888380629678,
+                    142.2987191011236
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1368.1632908615634,
+            "scoreError" : 25.529711286545282,
+            "scoreConfidence" : [
+                1342.633579575018,
+                1393.6930021481087
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1358.5201934826885,
+                "50.0" : 1370.0843018480493,
+                "90.0" : 1376.0117028885832,
+                "95.0" : 1376.0117028885832,
+                "99.0" : 1376.0117028885832,
+                "99.9" : 1376.0117028885832,
+                "99.99" : 1376.0117028885832,
+                "99.999" : 1376.0117028885832,
+                "99.9999" : 1376.0117028885832,
+                "100.0" : 1376.0117028885832
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1365.1385709413369,
+                    1358.5201934826885,
+                    1371.0616851471596,
+                    1370.0843018480493,
+                    1376.0117028885832
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "i18n-100k"
+        },
+        "primaryMetric" : {
+            "score" : 171.18469853005018,
+            "scoreError" : 4.09481269929389,
+            "scoreConfidence" : [
+                167.0898858307563,
+                175.27951122934408
+            ],
+            "scorePercentiles" : {
+                "0.0" : 170.09638313068618,
+                "50.0" : 170.91166578407928,
+                "90.0" : 172.96427826763485,
+                "95.0" : 172.96427826763485,
+                "99.0" : 172.96427826763485,
+                "99.9" : 172.96427826763485,
+                "99.99" : 172.96427826763485,
+                "99.999" : 172.96427826763485,
+                "99.9999" : 172.96427826763485,
+                "100.0" : 172.96427826763485
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    170.91166578407928,
+                    172.96427826763485,
+                    171.04637083262097,
+                    170.09638313068618,
+                    170.9047946352298
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "export-1m"
+        },
+        "primaryMetric" : {
+            "score" : 272.78114321291025,
+            "scoreError" : 18.06675809696644,
+            "scoreConfidence" : [
+                254.7143851159438,
+                290.8479013098767
+            ],
+            "scorePercentiles" : {
+                "0.0" : 265.1015833554201,
+                "50.0" : 274.51535131055306,
+                "90.0" : 276.3888824423263,
+                "95.0" : 276.3888824423263,
+                "99.0" : 276.3888824423263,
+                "99.9" : 276.3888824423263,
+                "99.99" : 276.3888824423263,
+                "99.999" : 276.3888824423263,
+                "99.9999" : 276.3888824423263,
+                "100.0" : 276.3888824423263
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    274.51535131055306,
+                    276.3888824423263,
+                    276.22193371996684,
+                    271.67796523628465,
+                    265.1015833554201
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "geo-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1865.2778967893307,
+            "scoreError" : 75.88938369386156,
+            "scoreConfidence" : [
+                1789.388513095469,
+                1941.1672804831924
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1834.5154060494958,
+                "50.0" : 1874.1575992509363,
+                "90.0" : 1880.4663834586465,
+                "95.0" : 1880.4663834586465,
+                "99.0" : 1880.4663834586465,
+                "99.9" : 1880.4663834586465,
+                "99.99" : 1880.4663834586465,
+                "99.999" : 1880.4663834586465,
+                "99.9999" : 1880.4663834586465,
+                "100.0" : 1880.4663834586465
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1834.5154060494958,
+                    1856.8908942486084,
+                    1874.1575992509363,
+                    1880.4663834586465,
+                    1880.3592009389672
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.dslJson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1k"
+        },
+        "primaryMetric" : {
+            "score" : 2.215125855353435,
+            "scoreError" : 0.05726373008086355,
+            "scoreConfidence" : [
+                2.1578621252725716,
+                2.272389585434299
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2.1982330540553905,
+                "50.0" : 2.210892724176457,
+                "90.0" : 2.232730179069526,
+                "95.0" : 2.232730179069526,
+                "99.0" : 2.232730179069526,
+                "99.9" : 2.232730179069526,
+                "99.99" : 2.232730179069526,
+                "99.999" : 2.232730179069526,
+                "99.9999" : 2.232730179069526,
+                "100.0" : 2.232730179069526
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    2.228402131893058,
+                    2.1982330540553905,
+                    2.210892724176457,
+                    2.2053711875727435,
+                    2.232730179069526
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.dslJson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-100k"
+        },
+        "primaryMetric" : {
+            "score" : 110.89829289663051,
+            "scoreError" : 2.8977354990842596,
+            "scoreConfidence" : [
+                108.00055739754625,
+                113.79602839571477
+            ],
+            "scorePercentiles" : {
+                "0.0" : 109.84299104936576,
+                "50.0" : 110.9847388626907,
+                "90.0" : 111.8389835094192,
+                "95.0" : 111.8389835094192,
+                "99.0" : 111.8389835094192,
+                "99.9" : 111.8389835094192,
+                "99.99" : 111.8389835094192,
+                "99.999" : 111.8389835094192,
+                "99.9999" : 111.8389835094192,
+                "100.0" : 111.8389835094192
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    109.84299104936576,
+                    110.55265929814865,
+                    110.9847388626907,
+                    111.27209176352817,
+                    111.8389835094192
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.dslJson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1109.2957369111277,
+            "scoreError" : 11.986972407834468,
+            "scoreConfidence" : [
+                1097.3087645032933,
+                1121.2827093189621
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1106.279033738938,
+                "50.0" : 1108.7051085872577,
+                "90.0" : 1114.4089782729804,
+                "95.0" : 1114.4089782729804,
+                "99.0" : 1114.4089782729804,
+                "99.9" : 1114.4089782729804,
+                "99.99" : 1114.4089782729804,
+                "99.999" : 1114.4089782729804,
+                "99.9999" : 1114.4089782729804,
+                "100.0" : 1114.4089782729804
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1109.5512673322241,
+                    1114.4089782729804,
+                    1108.7051085872577,
+                    1106.279033738938,
+                    1107.534296624239
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.dslJson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "i18n-100k"
+        },
+        "primaryMetric" : {
+            "score" : 138.3653752027683,
+            "scoreError" : 2.066770515631252,
+            "scoreConfidence" : [
+                136.29860468713704,
+                140.43214571839954
+            ],
+            "scorePercentiles" : {
+                "0.0" : 137.5943851974137,
+                "50.0" : 138.4839365266145,
+                "90.0" : 138.8905707740368,
+                "95.0" : 138.8905707740368,
+                "99.0" : 138.8905707740368,
+                "99.9" : 138.8905707740368,
+                "99.99" : 138.8905707740368,
+                "99.999" : 138.8905707740368,
+                "99.9999" : 138.8905707740368,
+                "100.0" : 138.8905707740368
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    138.06848826777087,
+                    138.4839365266145,
+                    137.5943851974137,
+                    138.8905707740368,
+                    138.78949524800555
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.dslJson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "export-1m"
+        },
+        "primaryMetric" : {
+            "score" : 269.03257101670096,
+            "scoreError" : 20.11942519494828,
+            "scoreConfidence" : [
+                248.91314582175266,
+                289.15199621164925
+            ],
+            "scorePercentiles" : {
+                "0.0" : 263.65266618344754,
+                "50.0" : 267.8887547195073,
+                "90.0" : 277.7770790058317,
+                "95.0" : 277.7770790058317,
+                "99.0" : 277.7770790058317,
+                "99.9" : 277.7770790058317,
+                "99.99" : 277.7770790058317,
+                "99.999" : 277.7770790058317,
+                "99.9999" : 277.7770790058317,
+                "100.0" : 277.7770790058317
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    263.65266618344754,
+                    277.7770790058317,
+                    267.8316626506024,
+                    267.8887547195073,
+                    268.0126925241158
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.dslJson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "geo-1m"
+        },
+        "primaryMetric" : {
+            "score" : 917.4815842859731,
+            "scoreError" : 18.658495067942113,
+            "scoreConfidence" : [
+                898.823089218031,
+                936.1400793539152
+            ],
+            "scorePercentiles" : {
+                "0.0" : 910.4674449499545,
+                "50.0" : 919.0662351860358,
+                "90.0" : 922.6545426463808,
+                "95.0" : 922.6545426463808,
+                "99.0" : 922.6545426463808,
+                "99.9" : 922.6545426463808,
+                "99.99" : 922.6545426463808,
+                "99.999" : 922.6545426463808,
+                "99.9999" : 922.6545426463808,
+                "100.0" : 922.6545426463808
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    910.4674449499545,
+                    914.8335368084133,
+                    920.3861618390805,
+                    919.0662351860358,
+                    922.6545426463808
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1k"
+        },
+        "primaryMetric" : {
+            "score" : 1.5972894761317034,
+            "scoreError" : 0.04282104445252131,
+            "scoreConfidence" : [
+                1.5544684316791821,
+                1.6401105205842246
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1.5827930636167424,
+                "50.0" : 1.5982890777100411,
+                "90.0" : 1.6115903054347223,
+                "95.0" : 1.6115903054347223,
+                "99.0" : 1.6115903054347223,
+                "99.9" : 1.6115903054347223,
+                "99.99" : 1.6115903054347223,
+                "99.999" : 1.6115903054347223,
+                "99.9999" : 1.6115903054347223,
+                "100.0" : 1.6115903054347223
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1.6031595879976632,
+                    1.590615345899348,
+                    1.5827930636167424,
+                    1.6115903054347223,
+                    1.5982890777100411
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-100k"
+        },
+        "primaryMetric" : {
+            "score" : 86.85349891632335,
+            "scoreError" : 1.0299355318427321,
+            "scoreConfidence" : [
+                85.82356338448061,
+                87.88343444816608
+            ],
+            "scorePercentiles" : {
+                "0.0" : 86.51489265634461,
+                "50.0" : 86.97995530629103,
+                "90.0" : 87.10266425741281,
+                "95.0" : 87.10266425741281,
+                "99.0" : 87.10266425741281,
+                "99.9" : 87.10266425741281,
+                "99.99" : 87.10266425741281,
+                "99.999" : 87.10266425741281,
+                "99.9999" : 87.10266425741281,
+                "100.0" : 87.10266425741281
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    86.97995530629103,
+                    87.05033864160467,
+                    87.10266425741281,
+                    86.61964371996363,
+                    86.51489265634461
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1m"
+        },
+        "primaryMetric" : {
+            "score" : 905.7092700875355,
+            "scoreError" : 133.0143143974385,
+            "scoreConfidence" : [
+                772.694955690097,
+                1038.723584484974
+            ],
+            "scorePercentiles" : {
+                "0.0" : 884.669282051282,
+                "50.0" : 892.3490619982159,
+                "90.0" : 967.2139777670372,
+                "95.0" : 967.2139777670372,
+                "99.0" : 967.2139777670372,
+                "99.9" : 967.2139777670372,
+                "99.99" : 967.2139777670372,
+                "99.999" : 967.2139777670372,
+                "99.9999" : 967.2139777670372,
+                "100.0" : 967.2139777670372
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    967.2139777670372,
+                    892.3490619982159,
+                    893.0658508928572,
+                    891.2481777282851,
+                    884.669282051282
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "i18n-100k"
+        },
+        "primaryMetric" : {
+            "score" : 142.2419204283145,
+            "scoreError" : 2.00514575602657,
+            "scoreConfidence" : [
+                140.23677467228794,
+                144.24706618434107
+            ],
+            "scorePercentiles" : {
+                "0.0" : 141.83022373458104,
+                "50.0" : 142.03111806886758,
+                "90.0" : 143.05208272558272,
+                "95.0" : 143.05208272558272,
+                "99.0" : 143.05208272558272,
+                "99.9" : 143.05208272558272,
+                "99.99" : 143.05208272558272,
+                "99.999" : 143.05208272558272,
+                "99.9999" : 143.05208272558272,
+                "100.0" : 143.05208272558272
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    141.83022373458104,
+                    143.05208272558272,
+                    142.03111806886758,
+                    142.46172503916821,
+                    141.83445257337303
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "export-1m"
+        },
+        "primaryMetric" : {
+            "score" : 131.468487743558,
+            "scoreError" : 10.20066413915303,
+            "scoreConfidence" : [
+                121.26782360440497,
+                141.66915188271102
+            ],
+            "scorePercentiles" : {
+                "0.0" : 127.70109383378016,
+                "50.0" : 131.20369718633174,
+                "90.0" : 134.927813153457,
+                "95.0" : 134.927813153457,
+                "99.0" : 134.927813153457,
+                "99.9" : 134.927813153457,
+                "99.99" : 134.927813153457,
+                "99.999" : 134.927813153457,
+                "99.9999" : 134.927813153457,
+                "100.0" : 134.927813153457
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    127.70109383378016,
+                    132.67037185863006,
+                    131.20369718633174,
+                    130.83946268559095,
+                    134.927813153457
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "geo-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1216.638179638563,
+            "scoreError" : 19.303443693851737,
+            "scoreConfidence" : [
+                1197.3347359447114,
+                1235.9416233324148
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1210.7962202056867,
+                "50.0" : 1216.9033302919709,
+                "90.0" : 1222.4380794135614,
+                "95.0" : 1222.4380794135614,
+                "99.0" : 1222.4380794135614,
+                "99.9" : 1222.4380794135614,
+                "99.99" : 1222.4380794135614,
+                "99.999" : 1222.4380794135614,
+                "99.9999" : 1222.4380794135614,
+                "100.0" : 1222.4380794135614
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1216.9033302919709,
+                    1222.4380794135614,
+                    1220.5676664634145,
+                    1212.4856018181817,
+                    1210.7962202056867
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.foryUnsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1k"
+        },
+        "primaryMetric" : {
+            "score" : 1.8329373223218837,
+            "scoreError" : 0.03822344914982459,
+            "scoreConfidence" : [
+                1.794713873172059,
+                1.8711607714717082
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1.8214382614206266,
+                "50.0" : 1.8290941223588837,
+                "90.0" : 1.8471463899478613,
+                "95.0" : 1.8471463899478613,
+                "99.0" : 1.8471463899478613,
+                "99.9" : 1.8471463899478613,
+                "99.99" : 1.8471463899478613,
+                "99.999" : 1.8471463899478613,
+                "99.9999" : 1.8471463899478613,
+                "100.0" : 1.8471463899478613
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1.8471463899478613,
+                    1.8287814185918305,
+                    1.8214382614206266,
+                    1.8290941223588837,
+                    1.8382264192902171
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.foryUnsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-100k"
+        },
+        "primaryMetric" : {
+            "score" : 95.73705245270969,
+            "scoreError" : 0.7347845611502809,
+            "scoreConfidence" : [
+                95.00226789155941,
+                96.47183701385997
+            ],
+            "scorePercentiles" : {
+                "0.0" : 95.53371868583162,
+                "50.0" : 95.82443767963211,
+                "90.0" : 95.9584685851319,
+                "95.0" : 95.9584685851319,
+                "99.0" : 95.9584685851319,
+                "99.9" : 95.9584685851319,
+                "99.99" : 95.9584685851319,
+                "99.999" : 95.9584685851319,
+                "99.9999" : 95.9584685851319,
+                "100.0" : 95.9584685851319
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    95.82937612569458,
+                    95.9584685851319,
+                    95.53371868583162,
+                    95.82443767963211,
+                    95.53926118725822
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.foryUnsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1m"
+        },
+        "primaryMetric" : {
+            "score" : 981.5161815304433,
+            "scoreError" : 17.588846581495844,
+            "scoreConfidence" : [
+                963.9273349489474,
+                999.1050281119392
+            ],
+            "scorePercentiles" : {
+                "0.0" : 976.6794040995608,
+                "50.0" : 979.9170298726739,
+                "90.0" : 987.5648223099704,
+                "95.0" : 987.5648223099704,
+                "99.0" : 987.5648223099704,
+                "99.9" : 987.5648223099704,
+                "99.99" : 987.5648223099704,
+                "99.999" : 987.5648223099704,
+                "99.9999" : 987.5648223099704,
+                "100.0" : 987.5648223099704
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    976.6794040995608,
+                    978.4814166259168,
+                    979.9170298726739,
+                    984.9382347440945,
+                    987.5648223099704
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.foryUnsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "i18n-100k"
+        },
+        "primaryMetric" : {
+            "score" : 126.71981383425478,
+            "scoreError" : 4.7837821460922205,
+            "scoreConfidence" : [
+                121.93603168816256,
+                131.503595980347
+            ],
+            "scorePercentiles" : {
+                "0.0" : 124.78221847324436,
+                "50.0" : 126.77218764258555,
+                "90.0" : 128.10043062047768,
+                "95.0" : 128.10043062047768,
+                "99.0" : 128.10043062047768,
+                "99.9" : 128.10043062047768,
+                "99.99" : 128.10043062047768,
+                "99.999" : 128.10043062047768,
+                "99.9999" : 128.10043062047768,
+                "100.0" : 128.10043062047768
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    126.77218764258555,
+                    126.53443428209994,
+                    124.78221847324436,
+                    128.10043062047768,
+                    127.40979815286624
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.foryUnsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "export-1m"
+        },
+        "primaryMetric" : {
+            "score" : 85.14386816146649,
+            "scoreError" : 7.610693063881794,
+            "scoreConfidence" : [
+                77.53317509758469,
+                92.75456122534828
+            ],
+            "scorePercentiles" : {
+                "0.0" : 83.05041972848424,
+                "50.0" : 84.89353316077566,
+                "90.0" : 88.16824071053908,
+                "95.0" : 88.16824071053908,
+                "99.0" : 88.16824071053908,
+                "99.9" : 88.16824071053908,
+                "99.99" : 88.16824071053908,
+                "99.999" : 88.16824071053908,
+                "99.9999" : 88.16824071053908,
+                "100.0" : 88.16824071053908
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    88.16824071053908,
+                    83.85432253332216,
+                    84.89353316077566,
+                    85.75282467421125,
+                    83.05041972848424
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.foryUnsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "geo-1m"
+        },
+        "primaryMetric" : {
+            "score" : 2836.680153297253,
+            "scoreError" : 255.33927455833444,
+            "scoreConfidence" : [
+                2581.3408787389185,
+                3092.0194278555878
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2787.4717158774374,
+                "50.0" : 2816.6442433192688,
+                "90.0" : 2953.2723805309734,
+                "95.0" : 2953.2723805309734,
+                "99.0" : 2953.2723805309734,
+                "99.9" : 2953.2723805309734,
+                "99.99" : 2953.2723805309734,
+                "99.999" : 2953.2723805309734,
+                "99.9999" : 2953.2723805309734,
+                "100.0" : 2953.2723805309734
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    2818.0520929577465,
+                    2816.6442433192688,
+                    2807.9603338008415,
+                    2787.4717158774374,
+                    2953.2723805309734
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1k"
+        },
+        "primaryMetric" : {
+            "score" : 3.290820762233024,
+            "scoreError" : 0.093612236792768,
+            "scoreConfidence" : [
+                3.197208525440256,
+                3.3844329990257918
+            ],
+            "scorePercentiles" : {
+                "0.0" : 3.2645176540075576,
+                "50.0" : 3.288982968685789,
+                "90.0" : 3.3302335400314624,
+                "95.0" : 3.3302335400314624,
+                "99.0" : 3.3302335400314624,
+                "99.9" : 3.3302335400314624,
+                "99.99" : 3.3302335400314624,
+                "99.999" : 3.3302335400314624,
+                "99.9999" : 3.3302335400314624,
+                "100.0" : 3.3302335400314624
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    3.3302335400314624,
+                    3.2800890185578977,
+                    3.288982968685789,
+                    3.2645176540075576,
+                    3.2902806298824108
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-100k"
+        },
+        "primaryMetric" : {
+            "score" : 160.79368635061726,
+            "scoreError" : 4.0135873613162,
+            "scoreConfidence" : [
+                156.78009898930105,
+                164.80727371193348
+            ],
+            "scorePercentiles" : {
+                "0.0" : 159.85921607799264,
+                "50.0" : 160.45337199230028,
+                "90.0" : 162.0655561856923,
+                "95.0" : 162.0655561856923,
+                "99.0" : 162.0655561856923,
+                "99.9" : 162.0655561856923,
+                "99.99" : 162.0655561856923,
+                "99.999" : 162.0655561856923,
+                "99.9999" : 162.0655561856923,
+                "100.0" : 162.0655561856923
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    162.0655561856923,
+                    159.85921607799264,
+                    159.86267820041553,
+                    160.45337199230028,
+                    161.72760929668553
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1634.2138174449947,
+            "scoreError" : 31.31728430213539,
+            "scoreConfidence" : [
+                1602.8965331428592,
+                1665.5311017471302
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1627.1416837398374,
+                "50.0" : 1633.5696253061224,
+                "90.0" : 1647.3095283950618,
+                "95.0" : 1647.3095283950618,
+                "99.0" : 1647.3095283950618,
+                "99.9" : 1647.3095283950618,
+                "99.99" : 1647.3095283950618,
+                "99.999" : 1647.3095283950618,
+                "99.9999" : 1647.3095283950618,
+                "100.0" : 1647.3095283950618
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1633.5696253061224,
+                    1647.3095283950618,
+                    1627.7700528885273,
+                    1635.2781968954248,
+                    1627.1416837398374
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "i18n-100k"
+        },
+        "primaryMetric" : {
+            "score" : 172.98485812206508,
+            "scoreError" : 2.355235744164683,
+            "scoreConfidence" : [
+                170.6296223779004,
+                175.34009386622975
+            ],
+            "scorePercentiles" : {
+                "0.0" : 172.2918565891473,
+                "50.0" : 172.87269728655374,
+                "90.0" : 173.78420835504602,
+                "95.0" : 173.78420835504602,
+                "99.0" : 173.78420835504602,
+                "99.9" : 173.78420835504602,
+                "99.99" : 173.78420835504602,
+                "99.999" : 173.78420835504602,
+                "99.9999" : 173.78420835504602,
+                "100.0" : 173.78420835504602
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    172.2918565891473,
+                    172.87269728655374,
+                    173.41475396618986,
+                    172.56077441338854,
+                    173.78420835504602
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "export-1m"
+        },
+        "primaryMetric" : {
+            "score" : 364.9264034440714,
+            "scoreError" : 53.71213455666815,
+            "scoreConfidence" : [
+                311.21426888740325,
+                418.6385380007396
+            ],
+            "scorePercentiles" : {
+                "0.0" : 347.0292140131807,
+                "50.0" : 366.06670027447393,
+                "90.0" : 381.7290936844114,
+                "95.0" : 381.7290936844114,
+                "99.0" : 381.7290936844114,
+                "99.9" : 381.7290936844114,
+                "99.99" : 381.7290936844114,
+                "99.999" : 381.7290936844114,
+                "99.9999" : 381.7290936844114,
+                "100.0" : 381.7290936844114
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    355.5669402376308,
+                    366.06670027447393,
+                    381.7290936844114,
+                    374.2400690106602,
+                    347.0292140131807
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "geo-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1893.2242587158803,
+            "scoreError" : 46.37995238782918,
+            "scoreConfidence" : [
+                1846.844306328051,
+                1939.6042111037095
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1879.2076798122066,
+                "50.0" : 1890.499223796034,
+                "90.0" : 1907.272038131554,
+                "95.0" : 1907.272038131554,
+                "99.0" : 1907.272038131554,
+                "99.9" : 1907.272038131554,
+                "99.99" : 1907.272038131554,
+                "99.999" : 1907.272038131554,
+                "99.9999" : 1907.272038131554,
+                "100.0" : 1907.272038131554
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1903.9371503330162,
+                    1890.499223796034,
+                    1885.2052015065913,
+                    1879.2076798122066,
+                    1907.272038131554
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1k"
+        },
+        "primaryMetric" : {
+            "score" : 2.337193988734368,
+            "scoreError" : 0.05408628853691579,
+            "scoreConfidence" : [
+                2.283107700197452,
+                2.391280277271284
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2.3243831095664134,
+                "50.0" : 2.3358632830152986,
+                "90.0" : 2.360388931626453,
+                "95.0" : 2.360388931626453,
+                "99.0" : 2.360388931626453,
+                "99.9" : 2.360388931626453,
+                "99.99" : 2.360388931626453,
+                "99.999" : 2.360388931626453,
+                "99.9999" : 2.360388931626453,
+                "100.0" : 2.360388931626453
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    2.3358632830152986,
+                    2.360388931626453,
+                    2.3243831095664134,
+                    2.3279615558281295,
+                    2.3373730636355456
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-100k"
+        },
+        "primaryMetric" : {
+            "score" : 104.72849330302424,
+            "scoreError" : 0.6250665274723983,
+            "scoreConfidence" : [
+                104.10342677555184,
+                105.35355983049664
+            ],
+            "scorePercentiles" : {
+                "0.0" : 104.51644638938238,
+                "50.0" : 104.72574104712042,
+                "90.0" : 104.92822939726172,
+                "95.0" : 104.92822939726172,
+                "99.0" : 104.92822939726172,
+                "99.9" : 104.92822939726172,
+                "99.99" : 104.92822939726172,
+                "99.999" : 104.92822939726172,
+                "99.9999" : 104.92822939726172,
+                "100.0" : 104.92822939726172
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    104.63497578198556,
+                    104.83707389937106,
+                    104.51644638938238,
+                    104.72574104712042,
+                    104.92822939726172
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1067.6807800326822,
+            "scoreError" : 42.32537146777184,
+            "scoreConfidence" : [
+                1025.3554085649102,
+                1110.006151500454
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1055.8797234828496,
+                "50.0" : 1066.566565565032,
+                "90.0" : 1080.674837473002,
+                "95.0" : 1080.674837473002,
+                "99.0" : 1080.674837473002,
+                "99.9" : 1080.674837473002,
+                "99.99" : 1080.674837473002,
+                "99.999" : 1080.674837473002,
+                "99.9999" : 1080.674837473002,
+                "100.0" : 1080.674837473002
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1066.566565565032,
+                    1055.8797234828496,
+                    1058.3161385510311,
+                    1076.9666350914963,
+                    1080.674837473002
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "i18n-100k"
+        },
+        "primaryMetric" : {
+            "score" : 138.78851689394588,
+            "scoreError" : 2.750448688114476,
+            "scoreConfidence" : [
+                136.0380682058314,
+                141.53896558206037
+            ],
+            "scorePercentiles" : {
+                "0.0" : 138.04816659768213,
+                "50.0" : 138.6249319520477,
+                "90.0" : 139.90223788546257,
+                "95.0" : 139.90223788546257,
+                "99.0" : 139.90223788546257,
+                "99.9" : 139.90223788546257,
+                "99.99" : 139.90223788546257,
+                "99.999" : 139.90223788546257,
+                "99.9999" : 139.90223788546257,
+                "100.0" : 139.90223788546257
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    139.90223788546257,
+                    138.04816659768213,
+                    139.00263933287005,
+                    138.364608701667,
+                    138.6249319520477
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "export-1m"
+        },
+        "primaryMetric" : {
+            "score" : 127.66226552206362,
+            "scoreError" : 9.587822024911004,
+            "scoreConfidence" : [
+                118.07444349715261,
+                137.2500875469746
+            ],
+            "scorePercentiles" : {
+                "0.0" : 124.57094470390436,
+                "50.0" : 128.49422158726082,
+                "90.0" : 130.8886177798129,
+                "95.0" : 130.8886177798129,
+                "99.0" : 130.8886177798129,
+                "99.9" : 130.8886177798129,
+                "99.99" : 130.8886177798129,
+                "99.999" : 130.8886177798129,
+                "99.9999" : 130.8886177798129,
+                "100.0" : 130.8886177798129
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    125.82347698402717,
+                    124.57094470390436,
+                    128.53406655531285,
+                    128.49422158726082,
+                    130.8886177798129
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeRead.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g",
+            "-Djsonb.parserMaxStringBuffer=100000000"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "geo-1m"
+        },
+        "primaryMetric" : {
+            "score" : 766.11883228528,
+            "scoreError" : 22.37286259904579,
+            "scoreConfidence" : [
+                743.7459696862342,
+                788.4916948843257
+            ],
+            "scorePercentiles" : {
+                "0.0" : 758.3858984078847,
+                "50.0" : 765.7940838117107,
+                "90.0" : 773.7045781129157,
+                "95.0" : 773.7045781129157,
+                "99.0" : 773.7045781129157,
+                "99.9" : 773.7045781129157,
+                "99.99" : 773.7045781129157,
+                "99.999" : 773.7045781129157,
+                "99.9999" : 773.7045781129157,
+                "100.0" : 773.7045781129157
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    773.7045781129157,
+                    765.7940838117107,
+                    769.3105805459438,
+                    763.3990205479452,
+                    758.3858984078847
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1k"
+        },
+        "primaryMetric" : {
+            "score" : 2.722514895713853,
+            "scoreError" : 0.0851126206898788,
+            "scoreConfidence" : [
+                2.6374022750239745,
+                2.807627516403732
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2.7028660701860105,
+                "50.0" : 2.710099602106384,
+                "90.0" : 2.7556442542416777,
+                "95.0" : 2.7556442542416777,
+                "99.0" : 2.7556442542416777,
+                "99.9" : 2.7556442542416777,
+                "99.99" : 2.7556442542416777,
+                "99.999" : 2.7556442542416777,
+                "99.9999" : 2.7556442542416777,
+                "100.0" : 2.7556442542416777
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    2.7345504344391247,
+                    2.70941411759607,
+                    2.7556442542416777,
+                    2.710099602106384,
+                    2.7028660701860105
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-100k"
+        },
+        "primaryMetric" : {
+            "score" : 145.11026059423224,
+            "scoreError" : 3.1045514931175746,
+            "scoreConfidence" : [
+                142.00570910111466,
+                148.21481208734983
+            ],
+            "scorePercentiles" : {
+                "0.0" : 144.1953490484429,
+                "50.0" : 144.99962378605596,
+                "90.0" : 146.1424876926448,
+                "95.0" : 146.1424876926448,
+                "99.0" : 146.1424876926448,
+                "99.9" : 146.1424876926448,
+                "99.99" : 146.1424876926448,
+                "99.999" : 146.1424876926448,
+                "99.9999" : 146.1424876926448,
+                "100.0" : 146.1424876926448
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    146.1424876926448,
+                    145.69227879714578,
+                    144.52156364687184,
+                    144.1953490484429,
+                    144.99962378605596
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1396.565948010481,
+            "scoreError" : 40.57809829107839,
+            "scoreConfidence" : [
+                1355.9878497194027,
+                1437.1440463015592
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1386.7843541233542,
+                "50.0" : 1392.4228684759917,
+                "90.0" : 1407.985081632653,
+                "95.0" : 1407.985081632653,
+                "99.0" : 1407.985081632653,
+                "99.9" : 1407.985081632653,
+                "99.99" : 1407.985081632653,
+                "99.999" : 1407.985081632653,
+                "99.9999" : 1407.985081632653,
+                "100.0" : 1407.985081632653
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1387.873420360111,
+                    1407.7640154602952,
+                    1407.985081632653,
+                    1386.7843541233542,
+                    1392.4228684759917
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "i18n-100k"
+        },
+        "primaryMetric" : {
+            "score" : 148.41567615554462,
+            "scoreError" : 3.723887354657838,
+            "scoreConfidence" : [
+                144.69178880088677,
+                152.13956351020246
+            ],
+            "scorePercentiles" : {
+                "0.0" : 147.00967452795533,
+                "50.0" : 148.34732582103936,
+                "90.0" : 149.43504854368933,
+                "95.0" : 149.43504854368933,
+                "99.0" : 149.43504854368933,
+                "99.9" : 149.43504854368933,
+                "99.99" : 149.43504854368933,
+                "99.999" : 149.43504854368933,
+                "99.9999" : 149.43504854368933,
+                "100.0" : 149.43504854368933
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    147.00967452795533,
+                    148.0878045296425,
+                    148.34732582103936,
+                    149.43504854368933,
+                    149.19852735539655
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "export-1m"
+        },
+        "primaryMetric" : {
+            "score" : 496.5338781321874,
+            "scoreError" : 3.954622452473917,
+            "scoreConfidence" : [
+                492.57925567971347,
+                500.4885005846613
+            ],
+            "scorePercentiles" : {
+                "0.0" : 495.40133176528843,
+                "50.0" : 496.350470734127,
+                "90.0" : 498.0413517550411,
+                "95.0" : 498.0413517550411,
+                "99.0" : 498.0413517550411,
+                "99.9" : 498.0413517550411,
+                "99.99" : 498.0413517550411,
+                "99.999" : 498.0413517550411,
+                "99.9999" : 498.0413517550411,
+                "100.0" : 498.0413517550411
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    498.0413517550411,
+                    495.8850252788104,
+                    495.40133176528843,
+                    496.350470734127,
+                    496.99121112767017
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.avaje",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "geo-1m"
+        },
+        "primaryMetric" : {
+            "score" : 3084.872094889603,
+            "scoreError" : 33.313112871592125,
+            "scoreConfidence" : [
+                3051.5589820180107,
+                3118.185207761195
+            ],
+            "scorePercentiles" : {
+                "0.0" : 3072.191457055215,
+                "50.0" : 3085.922688751926,
+                "90.0" : 3096.1608454404945,
+                "95.0" : 3096.1608454404945,
+                "99.0" : 3096.1608454404945,
+                "99.9" : 3096.1608454404945,
+                "99.99" : 3096.1608454404945,
+                "99.999" : 3096.1608454404945,
+                "99.9999" : 3096.1608454404945,
+                "100.0" : 3096.1608454404945
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    3096.1608454404945,
+                    3087.2770401234566,
+                    3085.922688751926,
+                    3082.808443076923,
+                    3072.191457055215
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.dslJson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1k"
+        },
+        "primaryMetric" : {
+            "score" : 2.3076720470841323,
+            "scoreError" : 0.03138747008490181,
+            "scoreConfidence" : [
+                2.2762845769992306,
+                2.339059517169034
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2.2965206937671367,
+                "50.0" : 2.308635379269676,
+                "90.0" : 2.317554262461427,
+                "95.0" : 2.317554262461427,
+                "99.0" : 2.317554262461427,
+                "99.9" : 2.317554262461427,
+                "99.99" : 2.317554262461427,
+                "99.999" : 2.317554262461427,
+                "99.9999" : 2.317554262461427,
+                "100.0" : 2.317554262461427
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    2.317554262461427,
+                    2.2965206937671367,
+                    2.3031997833634152,
+                    2.308635379269676,
+                    2.312450116559007
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.dslJson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-100k"
+        },
+        "primaryMetric" : {
+            "score" : 114.96934929377508,
+            "scoreError" : 3.825752249467547,
+            "scoreConfidence" : [
+                111.14359704430754,
+                118.79510154324262
+            ],
+            "scorePercentiles" : {
+                "0.0" : 113.6011776465243,
+                "50.0" : 115.10567817480867,
+                "90.0" : 116.03440205288796,
+                "95.0" : 116.03440205288796,
+                "99.0" : 116.03440205288796,
+                "99.9" : 116.03440205288796,
+                "99.99" : 116.03440205288796,
+                "99.999" : 116.03440205288796,
+                "99.9999" : 116.03440205288796,
+                "100.0" : 116.03440205288796
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    113.6011776465243,
+                    115.72717990397409,
+                    115.10567817480867,
+                    116.03440205288796,
+                    114.37830869068038
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.dslJson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1246.2283802356687,
+            "scoreError" : 71.86987289843192,
+            "scoreConfidence" : [
+                1174.358507337237,
+                1318.0982531341006
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1219.7145603658537,
+                "50.0" : 1258.4060496855345,
+                "90.0" : 1260.7886912413358,
+                "95.0" : 1260.7886912413358,
+                "99.0" : 1260.7886912413358,
+                "99.9" : 1260.7886912413358,
+                "99.99" : 1260.7886912413358,
+                "99.999" : 1260.7886912413358,
+                "99.9999" : 1260.7886912413358,
+                "100.0" : 1260.7886912413358
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1219.7145603658537,
+                    1260.7886912413358,
+                    1258.9640610446822,
+                    1258.4060496855345,
+                    1233.268538840937
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.dslJson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "i18n-100k"
+        },
+        "primaryMetric" : {
+            "score" : 116.69778310645572,
+            "scoreError" : 3.6076521410101594,
+            "scoreConfidence" : [
+                113.09013096544555,
+                120.30543524746588
+            ],
+            "scorePercentiles" : {
+                "0.0" : 115.28022760011524,
+                "50.0" : 116.77413150061285,
+                "90.0" : 117.89396511490867,
+                "95.0" : 117.89396511490867,
+                "99.0" : 117.89396511490867,
+                "99.9" : 117.89396511490867,
+                "99.99" : 117.89396511490867,
+                "99.999" : 117.89396511490867,
+                "99.9999" : 117.89396511490867,
+                "100.0" : 117.89396511490867
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    115.28022760011524,
+                    117.89396511490867,
+                    116.60531874344329,
+                    116.77413150061285,
+                    116.93527257319853
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.dslJson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "export-1m"
+        },
+        "primaryMetric" : {
+            "score" : 511.6824670634126,
+            "scoreError" : 31.629577740410028,
+            "scoreConfidence" : [
+                480.0528893230026,
+                543.3120448038227
+            ],
+            "scorePercentiles" : {
+                "0.0" : 500.5323355016262,
+                "50.0" : 516.3838567741935,
+                "90.0" : 519.049895460441,
+                "95.0" : 519.049895460441,
+                "99.0" : 519.049895460441,
+                "99.9" : 519.049895460441,
+                "99.99" : 519.049895460441,
+                "99.999" : 519.049895460441,
+                "99.9999" : 519.049895460441,
+                "100.0" : 519.049895460441
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    516.3838567741935,
+                    517.0864130266218,
+                    519.049895460441,
+                    505.35983455418034,
+                    500.5323355016262
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.dslJson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "geo-1m"
+        },
+        "primaryMetric" : {
+            "score" : 2573.0264657460243,
+            "scoreError" : 87.76199079054872,
+            "scoreConfidence" : [
+                2485.2644749554756,
+                2660.788456536573
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2543.443878017789,
+                "50.0" : 2582.0504903225806,
+                "90.0" : 2594.885073929961,
+                "95.0" : 2594.885073929961,
+                "99.0" : 2594.885073929961,
+                "99.9" : 2594.885073929961,
+                "99.99" : 2594.885073929961,
+                "99.999" : 2594.885073929961,
+                "99.9999" : 2594.885073929961,
+                "100.0" : 2594.885073929961
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    2543.443878017789,
+                    2554.451524234694,
+                    2582.0504903225806,
+                    2590.301362225097,
+                    2594.885073929961
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1k"
+        },
+        "primaryMetric" : {
+            "score" : 1.468282909219472,
+            "scoreError" : 0.030329575290322822,
+            "scoreConfidence" : [
+                1.4379533339291493,
+                1.4986124845097948
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1.455698131054645,
+                "50.0" : 1.4690934220528131,
+                "90.0" : 1.4753475456846652,
+                "95.0" : 1.4753475456846652,
+                "99.0" : 1.4753475456846652,
+                "99.9" : 1.4753475456846652,
+                "99.99" : 1.4753475456846652,
+                "99.999" : 1.4753475456846652,
+                "99.9999" : 1.4753475456846652,
+                "100.0" : 1.4753475456846652
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1.455698131054645,
+                    1.4743876364783517,
+                    1.4668878108268844,
+                    1.4690934220528131,
+                    1.4753475456846652
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-100k"
+        },
+        "primaryMetric" : {
+            "score" : 75.94400628473488,
+            "scoreError" : 2.197845561681968,
+            "scoreConfidence" : [
+                73.74616072305291,
+                78.14185184641686
+            ],
+            "scorePercentiles" : {
+                "0.0" : 75.46087047863313,
+                "50.0" : 75.77441787878787,
+                "90.0" : 76.8717176235493,
+                "95.0" : 76.8717176235493,
+                "99.0" : 76.8717176235493,
+                "99.9" : 76.8717176235493,
+                "99.99" : 76.8717176235493,
+                "99.999" : 76.8717176235493,
+                "99.9999" : 76.8717176235493,
+                "100.0" : 76.8717176235493
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    76.8717176235493,
+                    75.53959336177925,
+                    75.46087047863313,
+                    76.07343208092486,
+                    75.77441787878787
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1m"
+        },
+        "primaryMetric" : {
+            "score" : 841.6966945603177,
+            "scoreError" : 6.437484620934974,
+            "scoreConfidence" : [
+                835.2592099393828,
+                848.1341791812526
+            ],
+            "scorePercentiles" : {
+                "0.0" : 839.3346758909853,
+                "50.0" : 841.6407754415475,
+                "90.0" : 843.7848975548061,
+                "95.0" : 843.7848975548061,
+                "99.0" : 843.7848975548061,
+                "99.9" : 843.7848975548061,
+                "99.99" : 843.7848975548061,
+                "99.999" : 843.7848975548061,
+                "99.9999" : 843.7848975548061,
+                "100.0" : 843.7848975548061
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    841.0926759142496,
+                    841.6407754415475,
+                    839.3346758909853,
+                    842.630448,
+                    843.7848975548061
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "i18n-100k"
+        },
+        "primaryMetric" : {
+            "score" : 82.27021550395614,
+            "scoreError" : 1.2741494603192598,
+            "scoreConfidence" : [
+                80.99606604363687,
+                83.5443649642754
+            ],
+            "scorePercentiles" : {
+                "0.0" : 81.78540917453698,
+                "50.0" : 82.29323132302123,
+                "90.0" : 82.69475036164496,
+                "95.0" : 82.69475036164496,
+                "99.0" : 82.69475036164496,
+                "99.9" : 82.69475036164496,
+                "99.99" : 82.69475036164496,
+                "99.999" : 82.69475036164496,
+                "99.9999" : 82.69475036164496,
+                "100.0" : 82.69475036164496
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    82.69475036164496,
+                    82.18523631881676,
+                    81.78540917453698,
+                    82.29323132302123,
+                    82.39245034176068
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "export-1m"
+        },
+        "primaryMetric" : {
+            "score" : 113.58135194873621,
+            "scoreError" : 12.142630354236607,
+            "scoreConfidence" : [
+                101.43872159449961,
+                125.72398230297281
+            ],
+            "scorePercentiles" : {
+                "0.0" : 110.53774155937448,
+                "50.0" : 113.11984378356985,
+                "90.0" : 118.89358639957202,
+                "95.0" : 118.89358639957202,
+                "99.0" : 118.89358639957202,
+                "99.9" : 118.89358639957202,
+                "99.99" : 118.89358639957202,
+                "99.999" : 118.89358639957202,
+                "99.9999" : 118.89358639957202,
+                "100.0" : 118.89358639957202
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    110.53774155937448,
+                    113.11984378356985,
+                    118.89358639957202,
+                    113.15032315176198,
+                    112.20526484940265
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.fastjson2Unsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "geo-1m"
+        },
+        "primaryMetric" : {
+            "score" : 2404.505216617123,
+            "scoreError" : 86.72698166987468,
+            "scoreConfidence" : [
+                2317.7782349472486,
+                2491.2321982869976
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2372.9587997630333,
+                "50.0" : 2404.3303673469386,
+                "90.0" : 2431.496844471446,
+                "95.0" : 2431.496844471446,
+                "99.0" : 2431.496844471446,
+                "99.9" : 2431.496844471446,
+                "99.99" : 2431.496844471446,
+                "99.999" : 2431.496844471446,
+                "99.9999" : 2431.496844471446,
+                "100.0" : 2431.496844471446
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    2431.496844471446,
+                    2418.997530834341,
+                    2404.3303673469386,
+                    2394.7425406698567,
+                    2372.9587997630333
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.foryUnsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1k"
+        },
+        "primaryMetric" : {
+            "score" : 1.6799077018127657,
+            "scoreError" : 0.02175326186982407,
+            "scoreConfidence" : [
+                1.6581544399429418,
+                1.7016609636825897
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1.6714803569488892,
+                "50.0" : 1.6810447023678512,
+                "90.0" : 1.687005585108177,
+                "95.0" : 1.687005585108177,
+                "99.0" : 1.687005585108177,
+                "99.9" : 1.687005585108177,
+                "99.99" : 1.687005585108177,
+                "99.999" : 1.687005585108177,
+                "99.9999" : 1.687005585108177,
+                "100.0" : 1.687005585108177
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1.678431536147055,
+                    1.687005585108177,
+                    1.6714803569488892,
+                    1.6810447023678512,
+                    1.6815763284918568
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.foryUnsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-100k"
+        },
+        "primaryMetric" : {
+            "score" : 82.59484903778865,
+            "scoreError" : 2.8412524541628628,
+            "scoreConfidence" : [
+                79.75359658362578,
+                85.43610149195152
+            ],
+            "scorePercentiles" : {
+                "0.0" : 81.82600507157464,
+                "50.0" : 82.72881724565757,
+                "90.0" : 83.46907552996161,
+                "95.0" : 83.46907552996161,
+                "99.0" : 83.46907552996161,
+                "99.9" : 83.46907552996161,
+                "99.99" : 83.46907552996161,
+                "99.999" : 83.46907552996161,
+                "99.9999" : 83.46907552996161,
+                "100.0" : 83.46907552996161
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    83.09798571013168,
+                    82.72881724565757,
+                    81.82600507157464,
+                    81.85236163161771,
+                    83.46907552996161
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.foryUnsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1m"
+        },
+        "primaryMetric" : {
+            "score" : 818.9268451954504,
+            "scoreError" : 16.304202365140824,
+            "scoreConfidence" : [
+                802.6226428303096,
+                835.2310475605912
+            ],
+            "scorePercentiles" : {
+                "0.0" : 813.7035978039853,
+                "50.0" : 817.6462386595832,
+                "90.0" : 824.268070428336,
+                "95.0" : 824.268070428336,
+                "99.0" : 824.268070428336,
+                "99.9" : 824.268070428336,
+                "99.99" : 824.268070428336,
+                "99.999" : 824.268070428336,
+                "99.9999" : 824.268070428336,
+                "100.0" : 824.268070428336
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    824.268070428336,
+                    813.7035978039853,
+                    817.6462386595832,
+                    822.1144293344289,
+                    816.9018897509187
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.foryUnsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "i18n-100k"
+        },
+        "primaryMetric" : {
+            "score" : 118.70719573073647,
+            "scoreError" : 3.3396012437364533,
+            "scoreConfidence" : [
+                115.36759448700002,
+                122.04679697447293
+            ],
+            "scorePercentiles" : {
+                "0.0" : 118.09551658599929,
+                "50.0" : 118.39659533672624,
+                "90.0" : 120.2122430597284,
+                "95.0" : 120.2122430597284,
+                "99.0" : 120.2122430597284,
+                "99.9" : 120.2122430597284,
+                "99.99" : 120.2122430597284,
+                "99.999" : 120.2122430597284,
+                "99.9999" : 120.2122430597284,
+                "100.0" : 120.2122430597284
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    120.2122430597284,
+                    118.64288498251022,
+                    118.39659533672624,
+                    118.09551658599929,
+                    118.18873868871825
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.foryUnsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "export-1m"
+        },
+        "primaryMetric" : {
+            "score" : 73.63124783413409,
+            "scoreError" : 6.488895566130955,
+            "scoreConfidence" : [
+                67.14235226800314,
+                80.12014340026504
+            ],
+            "scorePercentiles" : {
+                "0.0" : 71.94807732144142,
+                "50.0" : 73.47563042280424,
+                "90.0" : 76.35579976334975,
+                "95.0" : 76.35579976334975,
+                "99.0" : 76.35579976334975,
+                "99.9" : 76.35579976334975,
+                "99.99" : 76.35579976334975,
+                "99.999" : 76.35579976334975,
+                "99.9999" : 76.35579976334975,
+                "100.0" : 76.35579976334975
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    73.47563042280424,
+                    76.35579976334975,
+                    71.94807732144142,
+                    73.77407501382999,
+                    72.60265664924506
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.foryUnsafe",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "geo-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1699.941200769456,
+            "scoreError" : 37.95789637269157,
+            "scoreConfidence" : [
+                1661.9833043967644,
+                1737.8990971421474
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1685.977103622578,
+                "50.0" : 1702.0186471088434,
+                "90.0" : 1712.9272397260274,
+                "95.0" : 1712.9272397260274,
+                "99.0" : 1712.9272397260274,
+                "99.9" : 1712.9272397260274,
+                "99.99" : 1712.9272397260274,
+                "99.999" : 1712.9272397260274,
+                "99.9999" : 1712.9272397260274,
+                "100.0" : 1712.9272397260274
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1702.0186471088434,
+                    1712.9272397260274,
+                    1702.56416,
+                    1696.2188533898304,
+                    1685.977103622578
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1k"
+        },
+        "primaryMetric" : {
+            "score" : 2.2980191651274153,
+            "scoreError" : 0.021427641623953685,
+            "scoreConfidence" : [
+                2.2765915235034617,
+                2.319446806751369
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2.2894434272808093,
+                "50.0" : 2.298404879264733,
+                "90.0" : 2.303087835932149,
+                "95.0" : 2.303087835932149,
+                "99.0" : 2.303087835932149,
+                "99.9" : 2.303087835932149,
+                "99.99" : 2.303087835932149,
+                "99.999" : 2.303087835932149,
+                "99.9999" : 2.303087835932149,
+                "100.0" : 2.303087835932149
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    2.303087835932149,
+                    2.298404879264733,
+                    2.302710993124118,
+                    2.2894434272808093,
+                    2.2964486900352696
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-100k"
+        },
+        "primaryMetric" : {
+            "score" : 98.48942488705178,
+            "scoreError" : 2.3160061199970183,
+            "scoreConfidence" : [
+                96.17341876705477,
+                100.8054310070488
+            ],
+            "scorePercentiles" : {
+                "0.0" : 97.75974036253481,
+                "50.0" : 98.41498056867376,
+                "90.0" : 99.43415115816681,
+                "95.0" : 99.43415115816681,
+                "99.0" : 99.43415115816681,
+                "99.9" : 99.43415115816681,
+                "99.99" : 99.43415115816681,
+                "99.999" : 99.43415115816681,
+                "99.9999" : 99.43415115816681,
+                "100.0" : 99.43415115816681
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    97.75974036253481,
+                    98.41498056867376,
+                    98.36150326893772,
+                    99.43415115816681,
+                    98.4767490769458
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1070.6276592623976,
+            "scoreError" : 83.86760351212655,
+            "scoreConfidence" : [
+                986.760055750271,
+                1154.4952627745242
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1045.6716520376176,
+                "50.0" : 1084.1334734561212,
+                "90.0" : 1090.2443629427794,
+                "95.0" : 1090.2443629427794,
+                "99.0" : 1090.2443629427794,
+                "99.9" : 1090.2443629427794,
+                "99.99" : 1090.2443629427794,
+                "99.999" : 1090.2443629427794,
+                "99.9999" : 1090.2443629427794,
+                "100.0" : 1090.2443629427794
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1084.1334734561212,
+                    1084.903726681128,
+                    1048.1850811943425,
+                    1045.6716520376176,
+                    1090.2443629427794
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "i18n-100k"
+        },
+        "primaryMetric" : {
+            "score" : 132.95978426301207,
+            "scoreError" : 6.13947954562185,
+            "scoreConfidence" : [
+                126.82030471739021,
+                139.0992638086339
+            ],
+            "scorePercentiles" : {
+                "0.0" : 130.8993888670853,
+                "50.0" : 132.8724809748323,
+                "90.0" : 135.37596325867784,
+                "95.0" : 135.37596325867784,
+                "99.0" : 135.37596325867784,
+                "99.9" : 135.37596325867784,
+                "99.99" : 135.37596325867784,
+                "99.999" : 135.37596325867784,
+                "99.9999" : 135.37596325867784,
+                "100.0" : 135.37596325867784
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    132.8724809748323,
+                    132.68119171087534,
+                    132.96989650358947,
+                    130.8993888670853,
+                    135.37596325867784
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "export-1m"
+        },
+        "primaryMetric" : {
+            "score" : 579.0966937814685,
+            "scoreError" : 7.824823418069958,
+            "scoreConfidence" : [
+                571.2718703633985,
+                586.9215171995385
+            ],
+            "scorePercentiles" : {
+                "0.0" : 576.4326258640554,
+                "50.0" : 579.6710101361135,
+                "90.0" : 581.3462914003486,
+                "95.0" : 581.3462914003486,
+                "99.0" : 581.3462914003486,
+                "99.9" : 581.3462914003486,
+                "99.99" : 581.3462914003486,
+                "99.999" : 581.3462914003486,
+                "99.9999" : 581.3462914003486,
+                "100.0" : 581.3462914003486
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    581.3462914003486,
+                    579.6710101361135,
+                    577.5995792207792,
+                    576.4326258640554,
+                    580.4339622860458
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.jackson",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "geo-1m"
+        },
+        "primaryMetric" : {
+            "score" : 2301.98344678671,
+            "scoreError" : 218.32848582743907,
+            "scoreConfidence" : [
+                2083.6549609592707,
+                2520.311932614149
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2258.8905011286683,
+                "50.0" : 2275.5874147727272,
+                "90.0" : 2398.711532374101,
+                "95.0" : 2398.711532374101,
+                "99.0" : 2398.711532374101,
+                "99.9" : 2398.711532374101,
+                "99.99" : 2398.711532374101,
+                "99.999" : 2398.711532374101,
+                "99.9999" : 2398.711532374101,
+                "100.0" : 2398.711532374101
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    2398.711532374101,
+                    2271.361772985244,
+                    2258.8905011286683,
+                    2275.5874147727272,
+                    2305.366012672811
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1k"
+        },
+        "primaryMetric" : {
+            "score" : 2.7611354202346687,
+            "scoreError" : 0.1291388434570032,
+            "scoreConfidence" : [
+                2.6319965767776656,
+                2.890274263691672
+            ],
+            "scorePercentiles" : {
+                "0.0" : 2.7124272162197345,
+                "50.0" : 2.7601597627584913,
+                "90.0" : 2.806554759476374,
+                "95.0" : 2.806554759476374,
+                "99.0" : 2.806554759476374,
+                "99.9" : 2.806554759476374,
+                "99.99" : 2.806554759476374,
+                "99.999" : 2.806554759476374,
+                "99.9999" : 2.806554759476374,
+                "100.0" : 2.806554759476374
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    2.7124272162197345,
+                    2.806554759476374,
+                    2.7601597627584913,
+                    2.758097724625194,
+                    2.7684376380935514
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-100k"
+        },
+        "primaryMetric" : {
+            "score" : 121.21060624398224,
+            "scoreError" : 4.684803322648608,
+            "scoreConfidence" : [
+                116.52580292133364,
+                125.89540956663085
+            ],
+            "scorePercentiles" : {
+                "0.0" : 119.60379144992527,
+                "50.0" : 121.4313526341345,
+                "90.0" : 122.73726365198183,
+                "95.0" : 122.73726365198183,
+                "99.0" : 122.73726365198183,
+                "99.9" : 122.73726365198183,
+                "99.99" : 122.73726365198183,
+                "99.999" : 122.73726365198183,
+                "99.9999" : 122.73726365198183,
+                "100.0" : 122.73726365198183
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    121.4313526341345,
+                    119.60379144992527,
+                    120.45125737329963,
+                    122.73726365198183,
+                    121.8293661105699
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "users-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1203.2054516595076,
+            "scoreError" : 78.33364814496828,
+            "scoreConfidence" : [
+                1124.8718035145394,
+                1281.5390998044759
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1176.1711069958849,
+                "50.0" : 1202.3162872596154,
+                "90.0" : 1233.022900862069,
+                "95.0" : 1233.022900862069,
+                "99.0" : 1233.022900862069,
+                "99.9" : 1233.022900862069,
+                "99.99" : 1233.022900862069,
+                "99.999" : 1233.022900862069,
+                "99.9999" : 1233.022900862069,
+                "100.0" : 1233.022900862069
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1206.310046413502,
+                    1176.1711069958849,
+                    1198.206916766467,
+                    1202.3162872596154,
+                    1233.022900862069
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "i18n-100k"
+        },
+        "primaryMetric" : {
+            "score" : 138.3980089045329,
+            "scoreError" : 4.815009790126697,
+            "scoreConfidence" : [
+                133.5829991144062,
+                143.2130186946596
+            ],
+            "scorePercentiles" : {
+                "0.0" : 136.32809459551558,
+                "50.0" : 138.93809765923456,
+                "90.0" : 139.5085597405315,
+                "95.0" : 139.5085597405315,
+                "99.0" : 139.5085597405315,
+                "99.9" : 139.5085597405315,
+                "99.99" : 139.5085597405315,
+                "99.999" : 139.5085597405315,
+                "99.9999" : 139.5085597405315,
+                "100.0" : 139.5085597405315
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    139.5085597405315,
+                    139.03012016123427,
+                    138.93809765923456,
+                    138.18517236614852,
+                    136.32809459551558
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "export-1m"
+        },
+        "primaryMetric" : {
+            "score" : 281.6179341541091,
+            "scoreError" : 67.40196935189849,
+            "scoreConfidence" : [
+                214.2159648022106,
+                349.0199035060076
+            ],
+            "scorePercentiles" : {
+                "0.0" : 253.23179081245254,
+                "50.0" : 285.6689324575182,
+                "90.0" : 297.1247612117612,
+                "95.0" : 297.1247612117612,
+                "99.0" : 297.1247612117612,
+                "99.9" : 297.1247612117612,
+                "99.99" : 297.1247612117612,
+                "99.999" : 297.1247612117612,
+                "99.9999" : 297.1247612117612,
+                "100.0" : 297.1247612117612
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    278.1594856864925,
+                    253.23179081245254,
+                    297.1247612117612,
+                    285.6689324575182,
+                    293.90470060232116
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.37",
+        "benchmark" : "ai.snaphop.jsonl.bench.TreeWrite.jsonl",
+        "mode" : "avgt",
+        "threads" : 1,
+        "forks" : 1,
+        "jvm" : "/home/agentclaude/.sdkman/candidates/java/27.0.0.0+35-tem/bin/java",
+        "jvmArgs" : [
+            "-Djava.io.tmpdir=/tmp/claude-30035/-home-agentclaude-workspace-snaphop-jsonl/31c83624-b845-48af-8975-e5aeb555061d/scratchpad/jmh",
+            "-Xmx4g"
+        ],
+        "jdkVersion" : "27",
+        "vmName" : "OpenJDK 64-Bit Server VM",
+        "vmVersion" : "27+35",
+        "warmupIterations" : 3,
+        "warmupTime" : "2 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 5,
+        "measurementTime" : "2 s",
+        "measurementBatchSize" : 1,
+        "params" : {
+            "payload" : "geo-1m"
+        },
+        "primaryMetric" : {
+            "score" : 1959.5964644380977,
+            "scoreError" : 15.05667505623554,
+            "scoreConfidence" : [
+                1944.5397893818622,
+                1974.6531394943331
+            ],
+            "scorePercentiles" : {
+                "0.0" : 1955.680723362659,
+                "50.0" : 1958.8551252446184,
+                "90.0" : 1964.4030343473994,
+                "95.0" : 1964.4030343473994,
+                "99.0" : 1964.4030343473994,
+                "99.9" : 1964.4030343473994,
+                "99.99" : 1964.4030343473994,
+                "99.999" : 1964.4030343473994,
+                "99.9999" : 1964.4030343473994,
+                "100.0" : 1964.4030343473994
+            },
+            "scoreUnit" : "us/op",
+            "rawData" : [
+                [
+                    1956.1929931573802,
+                    1962.8504460784313,
+                    1958.8551252446184,
+                    1964.4030343473994,
+                    1955.680723362659
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+]
+
+

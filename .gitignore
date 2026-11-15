@@ -1,0 +1,20 @@
+target
+*.class
+*.log
+*.iml
+.idea
+.vscode
+.classpath
+.project
+.settings
+.factorypath
+.DS_Store
+# JMH result files
+/results/*.tmp
+
+# JMH and PIT logs (results/final.json is kept)
+/results/*.log
+/results/run*.json
+
+# written by the shade plugin
+dependency-reduced-pom.xml

@@ -1,0 +1,10 @@
+users-1k         1,883 bytes
+users-100k     100,532 bytes
+  read  avaje      DIFFERENT
+users-1m     1,001,735 bytes
+  read  avaje      DIFFERENT
+i18n-100k      101,962 bytes
+  read  avaje      DIFFERENT
+export-1m    1,000,217 bytes
+geo-1m         569,974 bytes
+Some differ.
