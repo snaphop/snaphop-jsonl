@@ -4,13 +4,55 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>ai.snaphop.jsonl</groupId>
-  <artifactId>jsonl-maven-parent</artifactId>
+  <groupId>com.snaphop</groupId>
+  <artifactId>snaphop-jsonl-parent</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>jsonl-maven-parent</name>
+  <name>snaphop-jsonl-parent</name>
   <description>Small, fast JSON and JSON lines for Java: no binding, no reflection, no limits</description>
+  <url>https://github.com/snaphop/snaphop-jsonl</url>
+
+  <licenses>
+    <license>
+      <name>Zero-Clause BSD</name>
+      <url>https://opensource.org/license/0bsd</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:https://github.com/snaphop/snaphop-jsonl.git</connection>
+    <developerConnection>scm:git:git@github.com:snaphop/snaphop-jsonl.git</developerConnection>
+    <url>https://github.com/snaphop/snaphop-jsonl/tree/main</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>agentgt</id>
+      <name>Adam Gent</name>
+      <organization>SnapHop</organization>
+    </developer>
+  </developers>
+
+  <!--
+    Deploy targets come from the snaphop profile in .snaphop/settings.xml, as
+    in snaphop-ical: ./mvnw -s .snaphop/settings.xml deploy (the password from
+    the NEXUS_SNAPHOP_COM_PASSWORD environment variable). See bin/release.sh.
+  -->
+  <distributionManagement>
+    <snapshotRepository>
+      <id>${snapshotRepository.id}</id>
+      <name>${snapshotRepository.name}</name>
+      <url>${snapshotRepository.url}</url>
+    </snapshotRepository>
+    <repository>
+      <id>${releaseRepository.id}</id>
+      <name>${releaseRepository.name}</name>
+      <url>${releaseRepository.url}</url>
+    </repository>
+  </distributionManagement>
 
   <modules>
     <module>jsonl</module>
@@ -20,6 +62,8 @@
   <properties>
     <java.release>25</java.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- Reproducible jars: the same sources make the same bytes. -->
+    <project.build.outputTimestamp>2026-11-15T00:00:00Z</project.build.outputTimestamp>
     <jspecify.version>1.0.1</jspecify.version>
     <junit.version>6.1.3</junit.version>
     <jmh.version>1.37</jmh.version>
@@ -73,7 +117,118 @@
           <artifactId>maven-shade-plugin</artifactId>
           <version>3.6.0</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.4.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-help-plugin</artifactId>
+          <version>3.5.2</version>
+        </plugin>
+        <plugin>
+          <!-- bin/release.sh sets each module's version with it. -->
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.23.0</version>
+          <configuration>
+            <generateBackupPoms>false</generateBackupPoms>
+            <processAllModules>true</processAllModules>
+          </configuration>
+        </plugin>
+        <plugin>
+          <!-- Whatever is public must be documented, @param and @return
+               included. -->
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.12.0</version>
+          <configuration>
+            <show>public</show>
+            <doclint>all</doclint>
+            <failOnWarnings>true</failOnWarnings>
+            <quiet>true</quiet>
+            <!-- Run every time: its up-to-date check misses changed contents. -->
+            <staleDataPath></staleDataPath>
+            <additionalOptions>
+              <additionalOption>--no-platform-links</additionalOption>
+            </additionalOptions>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.6.3</version>
+        <executions>
+          <execution>
+            <id>java-version</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>
+                  <version>[25,)</version>
+                  <message>Build with Java 25 or newer (sdk env install, then sdk env).</message>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <!-- A release (bin/release.sh, then the deploy workflow on its tag):
+           no SNAPSHOT version or dependency, and deployed with
+           .snaphop/settings.xml. -->
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>enforce-release</id>
+                <goals>
+                  <goal>enforce</goal>
+                </goals>
+                <configuration>
+                  <rules>
+                    <requireReleaseVersion>
+                      <message>Releases must not be SNAPSHOT versions</message>
+                    </requireReleaseVersion>
+                    <requireReleaseDeps>
+                      <message>Releases must not depend on SNAPSHOT versions</message>
+                    </requireReleaseDeps>
+                    <requireProperty>
+                      <property>releaseRepository.url</property>
+                      <message>Deploy with -s .snaphop/settings.xml</message>
+                    </requireProperty>
+                  </rules>
+                  <fail>true</fail>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

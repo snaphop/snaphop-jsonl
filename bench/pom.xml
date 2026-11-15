@@ -5,16 +5,20 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>ai.snaphop.jsonl</groupId>
-    <artifactId>jsonl-maven-parent</artifactId>
+    <groupId>com.snaphop</groupId>
+    <artifactId>snaphop-jsonl-parent</artifactId>
     <version>0.1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>jsonl-bench</artifactId>
-  <name>jsonl-bench</name>
+  <artifactId>snaphop-jsonl-bench</artifactId>
+  <name>snaphop-jsonl-bench</name>
   <description>JMH benchmarks of jsonl and other JSON libraries, after fabienrenaud/java-json-benchmark</description>
 
   <properties>
+    <!-- Benchmarks are never installed or published: only the library and its
+         parent are. -->
+    <maven.install.skip>true</maven.install.skip>
+    <maven.deploy.skip>true</maven.deploy.skip>
     <avaje-json.version>3.16</avaje-json.version>
     <jackson.version>3.2.4</jackson.version>
     <dsl-json.version>2.0.2</dsl-json.version>
@@ -24,8 +28,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>ai.snaphop.jsonl</groupId>
-      <artifactId>jsonl</artifactId>
+      <groupId>com.snaphop</groupId>
+      <artifactId>snaphop-jsonl</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

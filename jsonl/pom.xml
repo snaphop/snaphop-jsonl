@@ -5,20 +5,20 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>ai.snaphop.jsonl</groupId>
-    <artifactId>jsonl-maven-parent</artifactId>
+    <groupId>com.snaphop</groupId>
+    <artifactId>snaphop-jsonl-parent</artifactId>
     <version>0.1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>jsonl</artifactId>
-  <name>jsonl</name>
+  <artifactId>snaphop-jsonl</artifactId>
+  <name>snaphop-jsonl</name>
   <description>Streaming JSON reader and writer, and JSON as maps and lists</description>
 
   <dependencies>
     <dependency>
       <groupId>org.jspecify</groupId>
       <artifactId>jspecify</artifactId>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <!-- An oracle for the fuzz tests only. -->
@@ -36,6 +36,28 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <!-- The javadoc jar that is published, which also fails the
+                 build on anything public undocumented. -->
+            <id>public-docs</id>
+            <goals><goal>jar</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals><goal>jar-no-fork</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -100,10 +122,10 @@
             </dependencies>
             <configuration>
               <targetClasses>
-                <param>ai.snaphop.jsonl.*</param>
+                <param>com.snaphop.jsonl.*</param>
               </targetClasses>
               <targetTests>
-                <param>ai.snaphop.jsonl.*</param>
+                <param>com.snaphop.jsonl.*</param>
               </targetTests>
               <mutators>
                 <mutator>STRONGER</mutator>

@@ -12,8 +12,25 @@ and no limit on the size of a string or a value beyond memory.
 * `Json`: one value to or from maps, lists, `String`, `Long` (`BigInteger` past a
   `long`), `Double`, `Boolean` and `null`.
 
-It is a 30 KB jar with `module ai.snaphop.jsonl`, and its only dependency is
-`requires static org.jspecify`.
+It is a 30 KB jar with `module com.snaphop.jsonl`, and its only dependency is
+`requires static transitive org.jspecify`. Releases are published to SnapHop's
+Maven repository:
+
+```xml
+<repositories>
+  <repository>
+    <id>snaphop-public-release</id>
+    <url>https://maven.snaphop.com/release</url>
+    <snapshots><enabled>false</enabled></snapshots>
+  </repository>
+</repositories>
+
+<dependency>
+  <groupId>com.snaphop</groupId>
+  <artifactId>snaphop-jsonl</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
 
 ```java
 // restore a gzipped JSON lines backup, a line at a time, at any size
@@ -39,8 +56,39 @@ try (var r = JsonReader.of(System.in)) {
 }
 ```
 
-Build with JDK 25 or later: `./mvnw install`. The library targets Java 25, as geon
-does.
+Build with JDK 25 or later: `./mvnw install`. `.sdkmanrc` names the JDK, and the
+library targets Java 25, as geon does. The source is under the
+[Zero-Clause BSD](LICENSE) license.
+
+## Publishing
+
+The library and its parent pom are published to SnapHop's Maven repository, as
+snaphop-ical is. The benchmarks are never installed or published.
+
+| Repository | Deployed to | Read from |
+|---|---|---|
+| Releases | `https://maven.snaphop.com/deploy/repository/public-release/` | `https://maven.snaphop.com/release` |
+| Snapshots | `https://maven.snaphop.com/deploy/repository/public-snapshot/` | |
+
+The deploy targets and their user names are in `.snaphop/settings.xml`. The password
+comes from the `NEXUS_SNAPHOP_COM_PASSWORD` environment variable, which is a secret of
+the GitHub repository.
+
+* **A release:** run `bin/release.sh` on `main`, clean and in sync with
+  `origin/main`. It does the following:
+  1. sets the version to `X.Y.Z` and runs `verify` with the `release` profile;
+  2. commits `Release X.Y.Z` and tags it `vX.Y.Z`;
+  3. commits `Prepare X.Y.(Z+1)-SNAPSHOT`;
+  4. pushes `main` and the tag.
+
+  The tag runs the `Deploy to SnapHop` workflow, which builds, tests and deploys
+  that version. `NO_PUSH=true` stops before pushing. The `release` profile refuses a
+  `SNAPSHOT` version or dependency, and a build without `-s .snaphop/settings.xml`.
+* **A snapshot:** run the `Deploy to SnapHop` workflow by hand on a branch.
+* **From this machine**, as a fallback: `bin/deploy.sh`, with the password in the
+  environment.
+
+An agent does not release, push a tag or deploy unless asked to.
 
 ## Why not avaje-jsonb
 
@@ -144,7 +192,7 @@ is the stable choice.
   (SWAR, through a `VarHandle` view of the `byte[]`, a standard API). It then builds
   the `String` with `new String(bytes, UTF_8)`, which the JDK vectorizes for ASCII.
   Escapes take a slower path through a scratch buffer.
-  `-Dai.snaphop.jsonl.noswar=true` turns the word scan off, for comparison.
+  `-Dcom.snaphop.jsonl.noswar=true` turns the word scan off, for comparison.
 * **Names.** A small shared cache, so a name repeated across a dump's lines is one
   `String`.
 * **Numbers.** Validated against the JSON grammar. Up to 18 digits become a `long`
@@ -175,7 +223,7 @@ same values.
 
 ```sh
 ./mvnw install -DskipTests
-java -cp bench/target/benchmarks.jar ai.snaphop.jsonl.bench.Check
+java -cp bench/target/benchmarks.jar com.snaphop.jsonl.bench.Check
 java -Djava.io.tmpdir=$PWD/target -jar bench/target/benchmarks.jar
 ```
 
@@ -215,7 +263,7 @@ The last column is avaje's time over jsonl's.
   geon does, since 3.16's stream reader has the buffer-edge bug.
 * jsonl is at least as fast as avaje everywhere. Writing users-1k is a tie, and
   Jackson writes small and medium trees about 15% faster.
-* `-Dai.snaphop.jsonl.noswar=true` turns the 8-byte string scan off. Short strings
+* `-Dcom.snaphop.jsonl.noswar=true` turns the 8-byte string scan off. Short strings
   then scan a byte at a time as now, and long ones (export-1m) take about 1.7× as
   long.
 
