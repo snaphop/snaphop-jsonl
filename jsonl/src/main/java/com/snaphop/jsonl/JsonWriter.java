@@ -345,10 +345,10 @@ public final class JsonWriter implements AutoCloseable, Flushable {
 	/// Flushes and closes the stream.
 	@Override
 	public void close() {
-		if (out != null) {
-			flush();
-			try {
-				out.close();
+		OutputStream stream = out;
+		if (stream != null) {
+			try (stream) {
+				flush();
 			}
 			catch (IOException e) {
 				throw new JsonException("Can't write JSON: " + e.getMessage(), e);

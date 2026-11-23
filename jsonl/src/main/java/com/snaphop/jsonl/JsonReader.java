@@ -31,8 +31,9 @@ import org.jspecify.annotations.Nullable;
 ///
 /// Nothing is limited but nesting ([#MAX_DEPTH]) unless asked: a string or a raw value
 /// may be as large as memory allows. For JSON nobody vouches for, set
-/// [#maxNumberLength(int)] and [#maxStringLength(int)], and bound the input as a whole. The buffer grows only while one token is longer than it,
-/// and a token may start and end anywhere in the stream.
+/// [#maxNumberLength(int)] and [#maxStringLength(int)], and bound the input as a whole.
+/// The buffer grows to hold a long token when needed, and a token may start and end
+/// anywhere in the stream.
 ///
 /// Invalid UTF-8 inside strings becomes U+FFFD, as [String#String(byte[],
 /// java.nio.charset.Charset)] does, and so does an escaped lone surrogate.
@@ -147,7 +148,7 @@ public final class JsonReader implements AutoCloseable {
 
 	private long numMantissa;
 
-	private int numExponent;
+	private long numExponent;
 
 	private boolean numIntegral;
 
@@ -214,9 +215,9 @@ public final class JsonReader implements AutoCloseable {
 	}
 
 	/// Refuses, from now on, to read a number longer than `length` characters (its sign,
-	/// point and exponent included), with a [JsonException] that leaves it next. Reading
-	/// stops at the limit, so a longer number isn't buffered whole. There is no limit
-	/// unless this is called.
+	/// point and exponent included), with a [JsonException]. The check can read ahead
+	/// into the stream buffer. A pull read leaves the refused number next. There is no
+	/// limit unless this is called.
 	///
 	/// For JSON nobody vouches for, as is [#maxStringLength(int)]. The JDK's `BigInteger`
 	/// and `BigDecimal` take time that grows with the square of a number's length: about
@@ -241,9 +242,9 @@ public final class JsonReader implements AutoCloseable {
 	}
 
 	/// Refuses, from now on, to read a string or a name longer than `length` bytes of
-	/// UTF-8 once unescaped, with a [JsonException]. Reading stops at the limit, so a
-	/// longer string isn't buffered whole; don't read on after it. There is no limit
-	/// unless this is called.
+	/// UTF-8 once unescaped, with a [JsonException]. The check can read ahead into the
+	/// stream buffer. Close the reader after this error. There is no limit unless this
+	/// is called.
 	///
 	/// For JSON nobody vouches for, from a stream with no end that bounds it, such as
 	/// JSON lines: without it, one string can take all the memory there is. A limit on
@@ -375,7 +376,7 @@ public final class JsonReader implements AutoCloseable {
 			d = new BigDecimal(new String(buf, start, end - start, StandardCharsets.ISO_8859_1));
 		}
 		catch (NumberFormatException e) {
-			// Only an exponent past an int's range: the scan checked the rest.
+			// The scanner already checked the syntax. BigDecimal limits exponent and scale.
 			if (numMantissa != 0) {
 				peeked = P_NUMBER;
 				throw error("Number " + numberText(start, end) + " is past a BigDecimal's range");
@@ -433,8 +434,9 @@ public final class JsonReader implements AutoCloseable {
 		};
 	}
 
-	/// Reads the next value as the JSON it was written as. Its brackets and strings are
-	/// checked, not what's between them.
+	/// Reads the next value as the JSON it was written as. Checks matching brackets
+	/// and string escapes. Number tokens and other syntax inside containers pass
+	/// through as written.
 	/// @return the JSON.
 	public String readRaw() {
 		int start = rawStart();
@@ -458,20 +460,21 @@ public final class JsonReader implements AutoCloseable {
 		return raw;
 	}
 
-	/// Skips the next value, or a name and its value. Its brackets and strings are
-	/// checked, not what's between them.
+	/// Skips the next value, or a name and its value, with bounded buffering.
+	/// Checks matching brackets and string escapes while passing over number tokens
+	/// and the remaining container grammar.
 	public void skipValue() {
 		int p = peekCode();
 		peeked = P_NONE;
 		switch (p) {
-			case P_BEGIN_OBJECT, P_BEGIN_ARRAY -> skipContainer();
+			case P_BEGIN_OBJECT, P_BEGIN_ARRAY -> skipContainer(p);
 			case P_NAME -> {
 				skipString();
 				colon();
 				skipValue();
 			}
 			case P_STRING -> skipString();
-			case P_NUMBER -> pos = numberEnd(Integer.MAX_VALUE);
+			case P_NUMBER -> skipNumber();
 			case P_TRUE, P_FALSE, P_NULL -> {
 			}
 			default -> {
@@ -643,10 +646,15 @@ public final class JsonReader implements AutoCloseable {
 		if (depth > MAX_DEPTH) {
 			throw error("JSON nests deeper than " + MAX_DEPTH);
 		}
-		if (depth == stack.length) {
-			stack = Arrays.copyOf(stack, depth * 2);
+		storeScope(depth, scope);
+		depth++;
+	}
+
+	private void storeScope(int level, int scope) {
+		if (level == stack.length) {
+			stack = Arrays.copyOf(stack, level * 2);
 		}
-		stack[depth++] = scope;
+		stack[level] = scope;
 	}
 
 	private void colon() {
@@ -884,15 +892,16 @@ public final class JsonReader implements AutoCloseable {
 			int p = pos;
 			int run = scanString(b, p, lim) - p;
 			if (run > 0) {
+				if ((long) n + run > maxStringLength) {
+					pos = p + run;
+					throw stringTooLong(name);
+				}
 				if (out.length - n < run + 4) {
 					out = Arrays.copyOf(out, (int) Math.min(MAX_BUFFER_SIZE, Math.max(out.length * 2L, (long) n + run + 16)));
 				}
 				System.arraycopy(b, p, out, n, run);
 				n += run;
 				pos = p += run;
-				if (n > maxStringLength) {
-					throw stringTooLong(name);
-				}
 				if (p == lim) {
 					continue;
 				}
@@ -910,7 +919,7 @@ public final class JsonReader implements AutoCloseable {
 				pos = p;
 				throw error("Unescaped control character in a string");
 			}
-			n = unescape(out, n);
+			n = utf8(escape(), out, n);
 			if (n > maxStringLength) {
 				throw stringTooLong(name);
 			}
@@ -921,47 +930,37 @@ public final class JsonReader implements AutoCloseable {
 		return error((name ? "A name" : "A string") + " is longer than the limit of " + maxStringLength + " bytes");
 	}
 
-	/// Decodes the escape after a backslash into `out` at `n`, which has room for 4.
-	private int unescape(byte[] out, int n) {
+	/// Reads and validates the escape after a backslash.
+	private int escape() {
 		ensure(1);
 		byte e = buf[pos++];
-		switch (e) {
-			case '"', '\\', '/' -> out[n++] = e;
-			case 'b' -> out[n++] = '\b';
-			case 'f' -> out[n++] = '\f';
-			case 'n' -> out[n++] = '\n';
-			case 'r' -> out[n++] = '\r';
-			case 't' -> out[n++] = '\t';
-			case 'u' -> {
-				int cp = hex4();
-				if (Character.isHighSurrogate((char) cp)) {
-					if (ensureSoft(6) && buf[pos] == '\\' && buf[pos + 1] == 'u') {
-						int at = pos;
-						pos += 2;
-						int low = hex4();
-						if (Character.isLowSurrogate((char) low)) {
-							cp = Character.toCodePoint((char) cp, (char) low);
-						}
-						else {
-							pos = at;
-							cp = 0xFFFD;
-						}
-					}
-					else {
-						cp = 0xFFFD;
-					}
-				}
-				else if (Character.isLowSurrogate((char) cp)) {
-					cp = 0xFFFD;
-				}
-				n = utf8(cp, out, n);
-			}
+		return switch (e) {
+			case '"', '\\', '/' -> e;
+			case 'b' -> '\b';
+			case 'f' -> '\f';
+			case 'n' -> '\n';
+			case 'r' -> '\r';
+			case 't' -> '\t';
+			case 'u' -> unicodeEscape();
 			default -> {
 				pos--;
 				throw error("Invalid escape '\\" + (char) (e & 0xFF) + "'");
 			}
+		};
+	}
+
+	private int unicodeEscape() {
+		int cp = hex4();
+		if (Character.isHighSurrogate((char) cp) && ensureSoft(6) && buf[pos] == '\\' && buf[pos + 1] == 'u') {
+			int at = pos;
+			pos += 2;
+			int low = hex4();
+			if (Character.isLowSurrogate((char) low)) {
+				return Character.toCodePoint((char) cp, (char) low);
+			}
+			pos = at;
 		}
-		return n;
+		return Character.isSurrogate((char) cp) ? 0xFFFD : cp;
 	}
 
 	private int hex4() {
@@ -1024,8 +1023,7 @@ public final class JsonReader implements AutoCloseable {
 					pos = i;
 					throw error("Unescaped control character in a string");
 				}
-				ensure(1);
-				pos++;
+				escape();
 				continue;
 			}
 			pos = i;
@@ -1036,8 +1034,13 @@ public final class JsonReader implements AutoCloseable {
 	}
 
 	/// Skips an array or object whose opening bracket is consumed.
-	private void skipContainer() {
-		int level = 1;
+	private void skipContainer(int openingToken) {
+		int level = depth;
+		if (level > MAX_DEPTH) {
+			throw error("JSON nests deeper than " + MAX_DEPTH);
+		}
+		// Reuse the part of the scope stack above the current pull-reader scopes.
+		storeScope(level, openingToken == P_BEGIN_OBJECT ? '}' : ']');
 		while (true) {
 			byte[] b = buf;
 			int lim = limit;
@@ -1053,13 +1056,18 @@ public final class JsonReader implements AutoCloseable {
 						p = pos;
 					}
 					case '{', '[' -> {
-						if (++level + depth - 1 > MAX_DEPTH) {
+						if (++level > MAX_DEPTH) {
 							pos = p;
 							throw error("JSON nests deeper than " + MAX_DEPTH);
 						}
+						storeScope(level, c == '{' ? '}' : ']');
 					}
 					case '}', ']' -> {
-						if (--level == 0) {
+						if (stack[level] != c) {
+							pos = p - 1;
+							throw unexpected(c, "'" + (char) stack[level] + "'");
+						}
+						if (level-- == depth) {
 							pos = p;
 							return;
 						}
@@ -1087,7 +1095,7 @@ public final class JsonReader implements AutoCloseable {
 		switch (p) {
 			case P_BEGIN_OBJECT, P_BEGIN_ARRAY -> {
 				mark = pos - 1;
-				skipContainer();
+				skipContainer(p);
 			}
 			case P_STRING -> {
 				mark = pos - 1;
@@ -1114,17 +1122,33 @@ public final class JsonReader implements AutoCloseable {
 		return (c >= '0' && c <= '9') || c == '.' || c == '-' || c == '+' || c == 'e' || c == 'E';
 	}
 
+	private int numberBytesEnd(int start, int end) {
+		byte[] b = buf;
+		int p = start;
+		while (p < end && isNumberByte(b[p])) {
+			p++;
+		}
+		return p;
+	}
+
+	private void skipNumber() {
+		do {
+			pos = numberBytesEnd(pos, limit);
+		}
+		while (pos == limit && fill());
+	}
+
+	private int numberScanLimit(int cap) {
+		return limit - pos <= cap ? limit : pos + cap + 1;
+	}
+
 	/// The end of the number at [#pos], which stays put. The number is in the buffer
 	/// whole, or, if it's longer than `cap`, more than `cap` of it.
 	private int numberEnd(int cap) {
 		int p = pos;
 		while (true) {
-			byte[] b = buf;
-			int lim = limit;
-			while (p < lim && isNumberByte(b[p])) {
-				p++;
-			}
-			if (p < lim || p - pos > cap) {
+			p = numberBytesEnd(p, numberScanLimit(cap));
+			if (p < limit || p - pos > cap) {
 				return p;
 			}
 			int scanned = p - pos;
@@ -1137,11 +1161,16 @@ public final class JsonReader implements AutoCloseable {
 
 	private static final int MAX_MANTISSA_DIGITS = 18;
 
+	// A token fits in an int-indexed buffer. An exponent beyond this bound stays
+	// outside the integer and double fast paths after any decimal-point adjustment.
+	private static final long MAX_TRACKED_EXPONENT = Integer.MAX_VALUE + 32L;
+
 	/// Reads the number at [#pos], which stays put, into the `num` fields, and returns
 	/// its end. Reads more input only if the number reaches the end of the buffer. One
 	/// longer than [#maxNumberLength(int)] stays next.
 	private int number() {
-		int end = scanNumber(pos, limit, eof);
+		int scanLimit = numberScanLimit(maxNumberLength);
+		int end = scanNumber(pos, scanLimit, eof && scanLimit == limit);
 		if (end < 0) {
 			end = numberEnd(maxNumberLength);
 			if (end - pos <= maxNumberLength) {
@@ -1149,7 +1178,6 @@ public final class JsonReader implements AutoCloseable {
 			}
 		}
 		if (end - pos > maxNumberLength) {
-			peeked = P_NUMBER;
 			throw numberTooLong();
 		}
 		return end;
@@ -1158,6 +1186,7 @@ public final class JsonReader implements AutoCloseable {
 	/// An error for the number at [#pos], which has more than [#maxNumberLength] bytes
 	/// in the buffer.
 	private JsonException numberTooLong() {
+		peeked = P_NUMBER;
 		return error("Number " + new String(buf, pos, Math.min(maxNumberLength, MAX_NUMBER_IN_MESSAGE),
 				StandardCharsets.ISO_8859_1) + "... is longer than the limit of " + maxNumberLength + " characters");
 	}
@@ -1173,7 +1202,7 @@ public final class JsonReader implements AutoCloseable {
 		}
 		long m = 0;
 		int digits = 0;
-		int exponent = 0;
+		long exponent = 0;
 		boolean truncated = false;
 		int intStart = i;
 		while (i < lim && b[i] >= '0' && b[i] <= '9') {
@@ -1228,10 +1257,10 @@ public final class JsonReader implements AutoCloseable {
 				negativeExponent = b[i++] == '-';
 			}
 			int expStart = i;
-			int e = 0;
+			long e = 0;
 			while (i < lim && b[i] >= '0' && b[i] <= '9') {
-				if (e < 100_000) {
-					e = e * 10 + b[i] - '0';
+				if (e < MAX_TRACKED_EXPONENT) {
+					e = Math.min(MAX_TRACKED_EXPONENT, e * 10 + b[i] - '0');
 				}
 				i++;
 			}
@@ -1270,9 +1299,9 @@ public final class JsonReader implements AutoCloseable {
 	/// The scanned number in `buf[start, end)` as a double.
 	private double toDouble(int start, int end) {
 		long m = numMantissa;
-		int e = numExponent;
-		if (!numTruncated && m < 1L << 53 && e >= -22 && e <= 22) {
+		if (!numTruncated && m < 1L << 53 && numExponent >= -22 && numExponent <= 22) {
 			// Exact: both operands are exact doubles, so IEEE rounds once (Clinger).
+			int e = (int) numExponent;
 			double d = m;
 			d = e < 0 ? d / POWERS_OF_TEN[-e] : d * POWERS_OF_TEN[e];
 			return numNegative ? -d : d;
@@ -1303,8 +1332,11 @@ public final class JsonReader implements AutoCloseable {
 			return 0L; // every digit is 0, whatever the exponent
 		}
 		// m holds the first 18 significant digits, and the number is about m * 10^numExponent,
-		// so it has this many digits before the point. More than 19 overflow at the 20th.
-		int whole = Long.toString(m).length() + numExponent;
+		// so it has this many digits before the point.
+		long whole = Long.toString(m).length() + numExponent;
+		if (whole < 1 || whole > 19) {
+			return null;
+		}
 		long v = 0; // negative as it goes, so Long.MIN_VALUE fits
 		int taken = 0;
 		boolean significant = false;

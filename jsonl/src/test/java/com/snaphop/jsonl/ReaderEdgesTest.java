@@ -84,6 +84,19 @@ class ReaderEdgesTest {
 		JsonReaderTest.pull(r);
 	}
 
+	@Test
+	void rawAndSkipRespectTheDepthAlreadyEntered() {
+		int max = JsonReader.MAX_DEPTH;
+		for (var read : List.<Consumer<JsonReader>>of(JsonReader::skipValue, JsonReader::readRaw, JsonReader::readRawBytes)) {
+			assertEquals("JSON nests deeper than 1000 at line 1, column 1002 (offset 1001)", error(nested(max + 1), r -> {
+				for (int i = 0; i < max; i++) {
+					r.beginArray();
+				}
+				read.accept(r);
+			}));
+		}
+	}
+
 	// Errors through the pull API
 
 	@Test
@@ -394,6 +407,43 @@ class ReaderEdgesTest {
 	}
 
 	@Test
+	void appliesTheFullExponentAfterMovingTheDecimalPoint() {
+		String tooLarge = "0." + "0".repeat(99_999) + "1e1000000";
+		assertEquals(Double.parseDouble(tooLarge), Json.read(tooLarge));
+		try (var r = stream("[" + tooLarge + ",2]", 16)) {
+			r.beginArray();
+			assertThrows(JsonException.class, r::nextLong);
+			assertThrows(JsonException.class, r::nextInt);
+			assertEquals(Double.parseDouble(tooLarge), r.nextDouble());
+			assertEquals(2, r.nextInt());
+			r.endArray();
+		}
+
+		String exactlyOne = "1" + "0".repeat(1_000_000) + "e-1000000";
+		try (var r = JsonReader.of(exactlyOne)) {
+			assertEquals(1, r.nextLong());
+		}
+	}
+
+	@Test
+	void skipsANumberWithTheOriginalStreamBuffer() {
+		byte[] json = ("[" + "7".repeat(100_000) + ",42]").getBytes(StandardCharsets.US_ASCII);
+		var in = new ByteArrayInputStream(json) {
+			@Override
+			public synchronized int read(byte[] b, int off, int len) {
+				assertEquals(16, b.length);
+				return super.read(b, off, len);
+			}
+		};
+		try (var r = JsonReader.of(in, 16).maxNumberLength(2)) {
+			r.beginArray();
+			r.skipValue();
+			assertEquals(42, r.nextInt());
+			r.endArray();
+		}
+	}
+
+	@Test
 	void refusesExponentsPastABigDecimal() {
 		assertEquals("Number 1e99999999999 is past a BigDecimal's range at line 1, column 1 (offset 0)",
 				error("1e99999999999", JsonReader::nextBigDecimal));
@@ -539,6 +589,27 @@ class ReaderEdgesTest {
 				error("[1.2.3]", r -> r.maxNumberLength(5).readValue()));
 		assertEquals("Number 1.2.3... is longer than the limit of 5 characters at line 1, column 2 (offset 1)",
 				error("[1.2.34]", r -> r.maxNumberLength(5).readValue()));
+		try (var r = stream("[1.2.34,2]", 16).maxNumberLength(5)) {
+			r.beginArray();
+			assertThrows(JsonException.class, r::nextDouble);
+			assertEquals(JsonReader.Token.NUMBER, r.peek());
+			r.skipValue();
+			assertEquals(2, r.nextInt());
+			r.endArray();
+		}
+	}
+
+	@Test
+	void validatesBracketsAndEscapesWhenSkippingOrReadingRawValues() {
+		for (var read : List.<Consumer<JsonReader>>of(JsonReader::skipValue, JsonReader::readRaw, JsonReader::readRawBytes)) {
+			assertEquals("Expected '}' but found ']' at line 2, column 2 (offset 4)", error("[{\n ]}", read));
+			assertEquals("Invalid escape '\\q' at line 1, column 3 (offset 2)", error("\"\\q\"", read));
+			String padding = " ".repeat(12);
+			try (var r = stream(padding + "[\"\\u12g4\"]", 16)) {
+				assertEquals("Invalid \\u escape at line 1, column 19 (offset 18)",
+						assertThrows(JsonException.class, () -> read.accept(r)).getMessage());
+			}
+		}
 	}
 
 	@Test
