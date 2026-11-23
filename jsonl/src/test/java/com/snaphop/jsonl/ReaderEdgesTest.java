@@ -432,7 +432,7 @@ class ReaderEdgesTest {
 		for (Consumer<JsonReader> read : List.<Consumer<JsonReader>>of(JsonReader::readValue, JsonReader::nextBigDecimal,
 				JsonReader::nextLong, JsonReader::nextInt, JsonReader::nextDouble, JsonReader::nextString)) {
 			assertTimeoutPreemptively(java.time.Duration.ofSeconds(5), () -> assertEquals("Number " + "9".repeat(40)
-					+ "... (1000000 characters) is longer than the limit of 1000 characters at line 1, column 1 (offset 0)",
+					+ "... is longer than the limit of 1000 characters at line 1, column 1 (offset 0)",
 					error(digits, r -> read.accept(r.maxNumberLength(1000)))));
 		}
 		// The sign, point and exponent count; exactly the limit is read.
@@ -440,7 +440,7 @@ class ReaderEdgesTest {
 			r.beginArray();
 			assertEquals(-1.5e10, r.nextDouble());
 			var e = assertThrows(JsonException.class, r::readValue);
-			assertEquals("Number -1.5e+100 is longer than the limit of 8 characters at line 1, column 11 (offset 10)",
+			assertEquals("Number -1.5e+10... is longer than the limit of 8 characters at line 1, column 11 (offset 10)",
 					e.getMessage());
 			r.skipValue(); // still next; skipping doesn't check it
 			assertEquals(12345L, r.maxNumberLength(4).maxNumberLength(5).nextLong());
@@ -462,6 +462,130 @@ class ReaderEdgesTest {
 			r.beginArray();
 			assertEquals(1, r.nextInt());
 			assertThrows(JsonException.class, r::nextInt);
+		}
+	}
+
+	/// A stream that's all digits, or all of one string, for as long as it's read.
+	static InputStream endless(String start, byte fill) {
+		return new InputStream() {
+			int at;
+
+			@Override
+			public int read() {
+				return at < start.length() ? start.charAt(at++) : fill;
+			}
+
+			@Override
+			public int read(byte[] b, int off, int len) {
+				for (int i = 0; i < len; i++) {
+					b[off + i] = (byte) read();
+				}
+				return len;
+			}
+		};
+	}
+
+	@Test
+	void limitsStopReadingAnEndlessStream() {
+		try (var r = JsonReader.of(endless("[", (byte) '7')).maxNumberLength(100_000)) {
+			r.beginArray();
+			assertEquals("Number " + "7".repeat(40) + "... is longer than the limit of 100000 characters at line 1, column 2"
+					+ " (offset 1)", assertThrows(JsonException.class, r::readValue).getMessage());
+			assertEquals(JsonReader.Token.NUMBER, r.peek()); // still next
+		}
+		try (var r = JsonReader.of(endless("[\"", (byte) 's')).maxStringLength(100_000)) {
+			r.beginArray();
+			assertEquals("A string is longer than the limit of 100000 bytes at line 1, column 3 (offset 2)",
+					assertThrows(JsonException.class, r::nextString).getMessage());
+		}
+		try (var r = JsonReader.of(endless("{\"", (byte) 'n')).maxStringLength(100_000)) {
+			r.beginObject();
+			assertThrows(JsonException.class, r::nextName);
+		}
+		// A bad number stops at the limit too
+		try (var r = JsonReader.of(endless("[1.2.", (byte) '7')).maxNumberLength(100_000)) {
+			r.beginArray();
+			assertEquals("Number 1.2." + "7".repeat(36) + "... is longer than the limit of 100000 characters"
+					+ " at line 1, column 2 (offset 1)", assertThrows(JsonException.class, r::readValue).getMessage());
+		}
+	}
+
+	@Test
+	void limitsNumbersSplitAcrossFills() {
+		String exact = "12345678901234567890";
+		for (int pad = 0; pad < 40; pad++) {
+			try (var r = stream(" ".repeat(pad) + "[" + exact + "," + exact + "1]", 16).maxNumberLength(20)) {
+				r.beginArray();
+				assertEquals(new BigInteger(exact), r.readValue(), "pad " + pad);
+				assertThrows(JsonException.class, r::readValue, "pad " + pad);
+			}
+		}
+		// A byte at a time, so a read ends at every place in the number
+		byte[] json = ("[" + exact + "1," + exact + "]").getBytes(StandardCharsets.US_ASCII);
+		var in = new ByteArrayInputStream(json) {
+			@Override
+			public synchronized int read(byte[] b, int off, int len) {
+				return super.read(b, off, Math.min(len, 1));
+			}
+		};
+		try (var r = JsonReader.of(in, 16).maxNumberLength(20)) {
+			r.beginArray();
+			assertThrows(JsonException.class, r::readValue);
+			r.skipValue();
+			assertEquals(new BigInteger(exact), r.readValue());
+		}
+		// A bad number at the limit is named; past it, it's too long
+		assertEquals("Invalid number '1.2.3' at line 1, column 2 (offset 1)",
+				error("[1.2.3]", r -> r.maxNumberLength(5).readValue()));
+		assertEquals("Number 1.2.3... is longer than the limit of 5 characters at line 1, column 2 (offset 1)",
+				error("[1.2.34]", r -> r.maxNumberLength(5).readValue()));
+	}
+
+	@Test
+	void limitsStringLengthWhenAsked() {
+		// UTF-8 bytes once unescaped: "é" is 2, "\\u00e9" is 2, "\\n" is 1.
+		for (String s : List.of("\"abcd\"", "\"ab\u00e9\"", "\"abé\"", "\"a\\n\\u00e9\"", "\"\\n\\n\\n\\n\"", "\"\"")) {
+			try (var r = JsonReader.of("[" + s + "," + s + "]").maxStringLength(4)) {
+				r.beginArray();
+				assertEquals(Json.read(s), r.nextString(), s);
+				assertEquals(Json.read(s), r.readValue(), s);
+			}
+		}
+		for (String s : List.of("\"abcde\"", "\"abc\u00e9\"", "\"abcé\"", "\"a\\n\\n\\u00e9\"", "\"\\n\\n\\n\\n\\n\"",
+				"\"\\ud83d\\ude00a\"", "\"abcd\\n\"")) {
+			var e = assertThrows(JsonException.class, () -> {
+				try (var r = JsonReader.of(s).maxStringLength(4)) {
+					r.nextString();
+				}
+			}, s);
+			assertTrue(String.valueOf(e.getMessage()).startsWith("A string is longer than the limit of 4 bytes at line 1, column "), e.getMessage());
+		}
+		assertEquals("A name is longer than the limit of 2 bytes at line 1, column 3 (offset 2)",
+				error("{\"abc\":1}", r -> Json.map(r.maxStringLength(2).readValue())));
+		assertEquals("A string is longer than the limit of 2 bytes at line 1, column 9 (offset 8)",
+				error("{\"ab\":[\"abc\"]}", r -> r.maxStringLength(2).readValue()));
+		// Skipping and raw values don't check
+		try (var r = JsonReader.of("[\"abcdef\",\"abcdef\",\"ab\"]").maxStringLength(2)) {
+			r.beginArray();
+			r.skipValue();
+			assertEquals("\"abcdef\"", r.readRaw());
+			assertEquals("ab", r.nextString());
+		}
+		// A stream, the string split across fills, escaped and not
+		for (String s : List.of("x".repeat(100), "x".repeat(50) + "\\n" + "x".repeat(49))) {
+			try (var r = stream("[\"" + s + "\"]", 16).maxStringLength(100)) {
+				r.beginArray();
+				assertEquals(100, r.nextString().length());
+			}
+			try (var r = stream("[\"" + s + "x\"]", 16).maxStringLength(100)) {
+				r.beginArray();
+				assertThrows(JsonException.class, r::nextString);
+			}
+		}
+		var e = assertThrows(IllegalArgumentException.class, () -> JsonReader.of("1").maxStringLength(0));
+		assertEquals("maxStringLength 0 is under 1", e.getMessage());
+		try (var r = JsonReader.of("\"a\"").maxStringLength(1)) {
+			assertEquals("a", r.nextString());
 		}
 	}
 
