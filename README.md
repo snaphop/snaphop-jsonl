@@ -81,15 +81,14 @@ try (var r = JsonReader.of(body).maxNumberLength(1000).maxStringLength(1_000_000
 | Nesting | always 1000 (`JsonReader.MAX_DEPTH`) | the stack | |
 | The input as a whole | yours to set | memory: a tree of many small values | an HTTP server's request body limit, or a bounded `InputStream` |
 
-The limits are set on each reader, never through a global or a system property, so
-one part of a program can't loosen them for another, and the backups can still read
-anything. Both stop reading at the limit, so a hostile value is never buffered
-whole. A refused number stays next; after a refused string, stop reading.
+Each reader has its own limits. The checks stop once they find an over-limit token,
+subject to stream buffer read-ahead. A refused number stays next in the pull API.
+Close the reader after a string exceeds its limit.
 
-`skipValue` and `readRaw` don't read the strings and numbers they pass over, so the
-limits don't apply to them. Skipping takes no memory, but `readRaw` keeps the whole
-value, so bound the input before using it on untrusted JSON. `Json.read` sets no
-limits: use a `JsonReader` for untrusted JSON.
+`skipValue` and `readRaw` check bracket pairing and string escapes. Per-token limits
+apply to typed reads and tree reads. Skipping uses bounded buffering, and `readRaw`
+keeps the whole value. Use `JsonReader` with limits for untrusted JSON and bound the
+input before reading raw values.
 
 ## Publishing
 

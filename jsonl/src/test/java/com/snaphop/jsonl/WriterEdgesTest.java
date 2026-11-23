@@ -230,7 +230,14 @@ class WriterEdgesTest {
 		};
 		assertEquals("Can't write JSON: full", assertThrows(JsonException.class, () -> JsonWriter.of(out).value(1).flush()).getMessage());
 		assertEquals("Can't write JSON: stuck", assertThrows(JsonException.class, () -> JsonWriter.of(out).flush()).getMessage());
-		assertEquals("Can't write JSON: stuck", assertThrows(JsonException.class, () -> JsonWriter.of(out).close()).getMessage());
+		var flushError = assertThrows(JsonException.class, () -> JsonWriter.of(out).close());
+		assertEquals("Can't write JSON: stuck", flushError.getMessage());
+		assertEquals(1, flushError.getSuppressed().length);
+		assertEquals("jammed", flushError.getSuppressed()[0].getMessage());
+		var writeError = assertThrows(JsonException.class, () -> JsonWriter.of(out).value(1).close());
+		assertEquals("Can't write JSON: full", writeError.getMessage());
+		assertEquals(1, writeError.getSuppressed().length);
+		assertEquals("jammed", writeError.getSuppressed()[0].getMessage());
 		var closing = new ByteArrayOutputStream() {
 			@Override
 			public void close() throws IOException {
