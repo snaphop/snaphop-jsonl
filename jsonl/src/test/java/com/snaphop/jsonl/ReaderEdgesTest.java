@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
@@ -373,6 +374,56 @@ class ReaderEdgesTest {
 				r.endArray();
 			}
 		}
+	}
+
+	@Test
+	void readsWholeNumbersSpelledAnyWay() {
+		for (String n : List.of("9223372036854775807", "9223372036854775807.000", "922337203685477580.7e1",
+				"92233720368547758070e-1", "0.9223372036854775807e19", "-9223372036854775808", "-9223372036854775808.0",
+				"-922337203685477580.8E+1", "-0.0000000000000000009223372036854775808e37", "1e18", "100e-2", "0.5e1",
+				"0e99999999999", "-0.000e-99999999999", "922337203685477580e1", "-922337203685477580e1", "1e18", "1" + "0".repeat(100) + "e-100", "5.0" + "0".repeat(50))) {
+			try (var r = JsonReader.of(n)) {
+				assertEquals(new java.math.BigDecimal(n.replaceAll("e-?9{11}", "")).longValueExact(), r.nextLong(), n);
+			}
+		}
+		for (String n : List.of("9223372036854775808", "9223372036854775807.1", "922337203685477580.8e1",
+				"-9223372036854775809", "-922337203685477580.9e1", "1e19", "0.5", "1e-1", "1.00000000000000000001",
+				"123456789012345678.5", "1234567890123456789.5", "9999999999999999999", "-9999999999999999999", "99999999999999999.99e2", "1" + "0".repeat(39), "1e99999999999", "1E-99999999999", "-1e2147483648")) {
+			assertEquals("Number " + n + " isn't a long at line 1, column 1 (offset 0)", error(n, JsonReader::nextLong));
+		}
+	}
+
+	@Test
+	void refusesExponentsPastABigDecimal() {
+		assertEquals("Number 1e99999999999 is past a BigDecimal's range at line 1, column 1 (offset 0)",
+				error("1e99999999999", JsonReader::nextBigDecimal));
+		assertEquals("Number -1.5E-99999999999 is past a BigDecimal's range at line 1, column 1 (offset 0)",
+				error("-1.5E-99999999999", JsonReader::nextBigDecimal));
+		assertEquals("Number 1e99999999999 isn't an int at line 1, column 1 (offset 0)",
+				error("1e99999999999", JsonReader::nextInt));
+		try (var r = JsonReader.of("[0e99999999999,1e99999999999]")) {
+			r.beginArray();
+			assertEquals(java.math.BigDecimal.ZERO, r.nextBigDecimal());
+			assertThrows(JsonException.class, r::nextBigDecimal);
+			assertEquals("1e99999999999", r.nextString()); // still next after the failure
+			r.endArray();
+		}
+	}
+
+	@Test
+	void longNumbersAreQuickToRefuseAndShortInMessages() {
+		String digits = "9".repeat(1_000_000);
+		assertTimeoutPreemptively(java.time.Duration.ofSeconds(5), () -> {
+			assertEquals("Number " + "9".repeat(40) + "... (1000000 characters) isn't a long"
+					+ " at line 1, column 1 (offset 0)", error(digits, JsonReader::nextLong));
+			assertEquals("Number 1." + "0".repeat(38) + "... (1000002 characters) isn't an int"
+					+ " at line 1, column 1 (offset 0)", error("1." + "0".repeat(999_999) + "1", JsonReader::nextInt));
+			try (var r = JsonReader.of("1" + "0".repeat(999_999) + "e-999999")) {
+				assertEquals(1L, r.nextLong());
+			}
+		});
+		assertEquals("Invalid number '-" + "0".repeat(39) + "... (1000001 characters)'"
+				+ " at line 1, column 1 (offset 0)", error("-" + "0".repeat(1_000_000), JsonReader::readValue));
 	}
 
 	@Test

@@ -266,6 +266,9 @@ class FuzzTest {
 	}
 
 	static String numberText(Random r) {
+		if (r.nextInt(8) == 0) {
+			return nearLongEdge(r);
+		}
 		var sb = new StringBuilder();
 		if (r.nextBoolean()) {
 			sb.append('-');
@@ -292,6 +295,28 @@ class FuzzTest {
 			sb.append(r.nextInt(r.nextInt(4) == 0 ? 400 : 30));
 		}
 		return sb.toString();
+	}
+
+	/// A number within a few of a long's edges, its point moved and an exponent to
+	/// move it back, with zeros added either side.
+	static String nearLongEdge(Random r) {
+		long edge = r.nextBoolean() ? Long.MAX_VALUE : Long.MIN_VALUE;
+		var value = java.math.BigInteger.valueOf(edge).add(java.math.BigInteger.valueOf(r.nextInt(5) - 2));
+		int zeros = r.nextInt(3);
+		String digits = value.abs().toString() + "0".repeat(zeros);
+		String text;
+		int exponent;
+		if (r.nextBoolean()) {
+			int point = 1 + r.nextInt(digits.length());
+			text = digits.substring(0, point) + (point < digits.length() ? "." + digits.substring(point) : "");
+			exponent = digits.length() - point - zeros;
+		}
+		else {
+			int leading = r.nextInt(3);
+			text = "0." + "0".repeat(leading) + digits;
+			exponent = leading + digits.length() - zeros;
+		}
+		return (value.signum() < 0 ? "-" : "") + text + (exponent != 0 || r.nextBoolean() ? "e" + exponent : "");
 	}
 
 	// Comparing
