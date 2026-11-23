@@ -2,7 +2,8 @@
 
 Small, stable JSON and JSON lines for Java, written to replace avaje-jsonb in
 snaphop-geon and an application's JSON lines backups. There is no binding, no reflection and no `Unsafe`,
-and no limit on the size of a string or a value beyond memory.
+and no limit on the size of a string or a value beyond memory. Numbers can be limited per
+reader for JSON nobody vouches for: `JsonReader.of(in).maxNumberLength(1000)`.
 
 * `JsonReader`: a pull parser over `byte[]`, `String` or an `InputStream`. It reads
   any number of top-level values, so JSON lines need no line splitting. It can also
@@ -214,7 +215,7 @@ What testing found:
 | dsl-json 2 | yes | yes | ~500 KB | | fast; untyped `Object` and the runtime are awkward |
 | fastjson2, Apache Fory JSON | **no** | | | | measured only as a ceiling |
 | Gson `JsonReader` | yes | yes | ~310 KB | | reads `char`s through a `Reader`; slower on bytes |
-| this | yes | yes | 30 KB | none but nesting depth (1000) | about 2,250 lines with their docs, and 2,000 of tests; we own it |
+| this | yes | yes | 30 KB | nesting depth (1000); number length, per reader, if asked | about 2,250 lines with their docs, and 2,000 of tests; we own it |
 
 If writing our own isn't wanted, Jackson 3's `jackson-core` with a small tree adapter
 is the stable choice.
