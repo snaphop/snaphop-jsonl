@@ -318,8 +318,20 @@ public final class JsonReader implements AutoCloseable {
 		expect(P_NUMBER, "a number");
 		int end = number();
 		int start = pos;
+		BigDecimal d;
+		try {
+			d = new BigDecimal(new String(buf, start, end - start, StandardCharsets.ISO_8859_1));
+		}
+		catch (NumberFormatException e) {
+			// Only an exponent past an int's range: the scan checked the rest.
+			if (numMantissa != 0) {
+				peeked = P_NUMBER;
+				throw error("Number " + numberText(start, end) + " is past a BigDecimal's range");
+			}
+			d = BigDecimal.ZERO;
+		}
 		pos = end;
-		return new BigDecimal(new String(buf, start, end - start, StandardCharsets.ISO_8859_1));
+		return d;
 	}
 
 	/// Reads `true` or `false`.
@@ -1166,7 +1178,7 @@ public final class JsonReader implements AutoCloseable {
 	private JsonException badNumber(int start) {
 		pos = start;
 		int end = numberEnd();
-		return error("Invalid number '" + new String(buf, pos, end - pos, StandardCharsets.ISO_8859_1) + "'");
+		return error("Invalid number '" + numberText(pos, end) + "'");
 	}
 
 	private static final double[] POWERS_OF_TEN = { 1e0, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10, 1e11,
@@ -1190,28 +1202,74 @@ public final class JsonReader implements AutoCloseable {
 	private long readLong(boolean asInt) {
 		int end = number();
 		int start = pos;
-		long v;
-		boolean fits = true;
-		if (numIntegral && numExponent == 0) {
-			v = numNegative ? -numMantissa : numMantissa;
-		}
-		else {
-			try {
-				v = new BigDecimal(new String(buf, start, end - start, StandardCharsets.ISO_8859_1)).longValueExact();
-			}
-			catch (ArithmeticException e) {
-				v = 0;
-				fits = false;
-			}
-		}
-		if (!fits || (asInt && (int) v != v)) {
+		Long v = numIntegral && numExponent == 0 ? Long.valueOf(numNegative ? -numMantissa : numMantissa)
+				: wholeLong(start, end);
+		if (v == null || (asInt && v.intValue() != v.longValue())) {
 			peeked = P_NUMBER;
-			throw error("Number " + new String(buf, start, end - start, StandardCharsets.ISO_8859_1) + " isn't "
-					+ (asInt ? "an int" : "a long"));
+			throw error("Number " + numberText(start, end) + " isn't " + (asInt ? "an int" : "a long"));
 		}
 		pos = end;
 		return v;
 	}
+
+	/// The scanned number in `buf[start, end)` as a long, or null if it isn't a whole
+	/// number that fits. Linear in its length, where `BigDecimal` is quadratic.
+	private @Nullable Long wholeLong(int start, int end) {
+		long m = numMantissa;
+		if (m == 0) {
+			return 0L; // every digit is 0, whatever the exponent
+		}
+		// m holds the first 18 significant digits, and the number is about m * 10^numExponent,
+		// so it has this many digits before the point. More than 19 overflow at the 20th.
+		int whole = Long.toString(m).length() + numExponent;
+		long v = 0; // negative as it goes, so Long.MIN_VALUE fits
+		int taken = 0;
+		boolean significant = false;
+		for (int i = numNegative ? start + 1 : start; i < end; i++) {
+			int c = buf[i];
+			if (c == 'e' || c == 'E') {
+				break;
+			}
+			if (c == '.' || (c == '0' && !significant)) {
+				continue;
+			}
+			significant = true;
+			int d = c - '0';
+			if (taken < whole) {
+				if (v < Long.MIN_VALUE / 10 || v * 10 < Long.MIN_VALUE + d) {
+					return null;
+				}
+				v = v * 10 - d;
+				taken++;
+			}
+			else if (d != 0) {
+				return null; // a fraction
+			}
+		}
+		for (; taken < whole; taken++) {
+			if (v < Long.MIN_VALUE / 10) {
+				return null;
+			}
+			v *= 10;
+		}
+		if (numNegative) {
+			return v;
+		}
+		return v == Long.MIN_VALUE ? null : -v;
+	}
+
+	/// The number in `buf[start, end)` for a message, cut short if it's long.
+	private String numberText(int start, int end) {
+		int length = end - start;
+		if (length <= MAX_NUMBER_IN_MESSAGE) {
+			return new String(buf, start, length, StandardCharsets.ISO_8859_1);
+		}
+		return new String(buf, start, MAX_NUMBER_IN_MESSAGE, StandardCharsets.ISO_8859_1) + "... (" + length
+				+ " characters)";
+	}
+
+	/// How much of a number a message shows.
+	private static final int MAX_NUMBER_IN_MESSAGE = 40;
 
 	private Object readNumber() {
 		int end = number();
