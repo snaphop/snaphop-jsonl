@@ -29,8 +29,9 @@ import org.jspecify.annotations.Nullable;
 /// }
 /// ```
 ///
-/// Nothing is limited but nesting ([#MAX_DEPTH]): a string or a raw value may be as
-/// large as memory allows. The buffer grows only while one token is longer than it,
+/// Nothing is limited but nesting ([#MAX_DEPTH]), and numbers if
+/// [#maxNumberLength(int)] says so: a string or a raw value may be as large as memory
+/// allows. The buffer grows only while one token is longer than it,
 /// and a token may start and end anywhere in the stream.
 ///
 /// Invalid UTF-8 inside strings becomes U+FFFD, as [String#String(byte[],
@@ -154,6 +155,8 @@ public final class JsonReader implements AutoCloseable {
 	/// digits count in numExponent too, so an integer fits a long only when that's 0.
 	private boolean numTruncated;
 
+	private int maxNumberLength = Integer.MAX_VALUE;
+
 	private JsonReader(@Nullable InputStream in, byte[] buf, int pos, int limit) {
 		this.in = in;
 		this.buf = buf;
@@ -206,6 +209,32 @@ public final class JsonReader implements AutoCloseable {
 			throw new IllegalArgumentException("bufferSize " + bufferSize + " is under 16");
 		}
 		return new JsonReader(in, new byte[bufferSize], 0, 0);
+	}
+
+	/// Refuses, from now on, to read a number longer than `length` characters (its sign,
+	/// point and exponent included), with a [JsonException] that leaves it next. There is
+	/// no limit unless this is called.
+	///
+	/// For JSON nobody vouches for. The JDK's `BigInteger` and `BigDecimal` take time
+	/// that grows with the square of a number's length: about 12 seconds for a million
+	/// digits. [#readValue()] reads a whole number past a `long` with `BigInteger`, and
+	/// [#nextBigDecimal()] reads any number with `BigDecimal`. 1000, as Jackson allows,
+	/// is plenty for any real number. [#skipValue()] and [#readRaw()] don't read the
+	/// numbers they pass over, so they don't check this.
+	///
+	/// ```
+	/// try (var r = JsonReader.of(request).maxNumberLength(1000)) {
+	///     Object body = r.readValue();
+	/// }
+	/// ```
+	/// @param length the most characters a number may have, at least 1.
+	/// @return this reader.
+	public JsonReader maxNumberLength(int length) {
+		if (length < 1) {
+			throw new IllegalArgumentException("maxNumberLength " + length + " is under 1");
+		}
+		this.maxNumberLength = length;
+		return this;
 	}
 
 	// Structure
@@ -1072,12 +1101,18 @@ public final class JsonReader implements AutoCloseable {
 	private static final int MAX_MANTISSA_DIGITS = 18;
 
 	/// Reads the number at [#pos], which stays put, into the `num` fields, and returns
-	/// its end. Reads more input only if the number reaches the end of the buffer.
+	/// its end. Reads more input only if the number reaches the end of the buffer. One
+	/// longer than [#maxNumberLength(int)] stays next.
 	private int number() {
 		int end = scanNumber(pos, limit, eof);
 		if (end < 0) {
 			int whole = numberEnd();
 			end = scanNumber(pos, whole, true);
+		}
+		if (end - pos > maxNumberLength) {
+			peeked = P_NUMBER;
+			throw error("Number " + numberText(pos, end) + " is longer than the limit of " + maxNumberLength
+					+ " characters");
 		}
 		return end;
 	}

@@ -427,6 +427,45 @@ class ReaderEdgesTest {
 	}
 
 	@Test
+	void limitsNumberLengthWhenAsked() {
+		String digits = "9".repeat(1_000_000);
+		for (Consumer<JsonReader> read : List.<Consumer<JsonReader>>of(JsonReader::readValue, JsonReader::nextBigDecimal,
+				JsonReader::nextLong, JsonReader::nextInt, JsonReader::nextDouble, JsonReader::nextString)) {
+			assertTimeoutPreemptively(java.time.Duration.ofSeconds(5), () -> assertEquals("Number " + "9".repeat(40)
+					+ "... (1000000 characters) is longer than the limit of 1000 characters at line 1, column 1 (offset 0)",
+					error(digits, r -> read.accept(r.maxNumberLength(1000)))));
+		}
+		// The sign, point and exponent count; exactly the limit is read.
+		try (var r = JsonReader.of("[-1.5e+10,-1.5e+100,12345]").maxNumberLength(8)) {
+			r.beginArray();
+			assertEquals(-1.5e10, r.nextDouble());
+			var e = assertThrows(JsonException.class, r::readValue);
+			assertEquals("Number -1.5e+100 is longer than the limit of 8 characters at line 1, column 11 (offset 10)",
+					e.getMessage());
+			r.skipValue(); // still next; skipping doesn't check it
+			assertEquals(12345L, r.maxNumberLength(4).maxNumberLength(5).nextLong());
+			r.endArray();
+		}
+		// A stream, the number split across fills
+		try (var r = stream("[" + "1".repeat(100) + "]", 16).maxNumberLength(99)) {
+			r.beginArray();
+			assertThrows(JsonException.class, r::nextBigDecimal);
+			assertEquals("1".repeat(100), r.readRaw()); // readRaw doesn't check it either
+		}
+		// Unlimited unless asked
+		try (var r = JsonReader.of("1".repeat(10_000))) {
+			assertEquals(new BigInteger("1".repeat(10_000)), r.readValue());
+		}
+		var e = assertThrows(IllegalArgumentException.class, () -> JsonReader.of("1").maxNumberLength(0));
+		assertEquals("maxNumberLength 0 is under 1", e.getMessage());
+		try (var r = JsonReader.of("[1,22]").maxNumberLength(1)) {
+			r.beginArray();
+			assertEquals(1, r.nextInt());
+			assertThrows(JsonException.class, r::nextInt);
+		}
+	}
+
+	@Test
 	void treesAreMutable() {
 		var map = Json.map(Json.read("{}"));
 		map.put("a", 1L);
