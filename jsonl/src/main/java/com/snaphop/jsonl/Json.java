@@ -11,7 +11,9 @@ import org.jspecify.annotations.Nullable;
 /// `Long`s (`BigInteger`s past a `long`), `Double`s, booleans and nulls.
 ///
 /// For JSON lines, or to read without building a tree, use [JsonReader] and
-/// [JsonWriter].
+/// [JsonWriter]. Reading here sets no limits: for JSON nobody vouches for, use a
+/// [JsonReader] with [JsonReader#maxNumberLength(int)] and
+/// [JsonReader#maxStringLength(int)].
 public final class Json {
 
 	private Json() {

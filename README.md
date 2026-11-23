@@ -2,8 +2,8 @@
 
 Small, stable JSON and JSON lines for Java, written to replace avaje-jsonb in
 snaphop-geon and an application's JSON lines backups. There is no binding, no reflection and no `Unsafe`,
-and no limit on the size of a string or a value beyond memory. Numbers can be limited per
-reader for JSON nobody vouches for: `JsonReader.of(in).maxNumberLength(1000)`.
+and no limit on the size of a string or a value beyond memory unless a reader is given
+one. For JSON from anyone else, give it one: see [Untrusted JSON](#untrusted-json).
 
 * `JsonReader`: a pull parser over `byte[]`, `String` or an `InputStream`. It reads
   any number of top-level values, so JSON lines need no line splitting. It can also
@@ -60,6 +60,36 @@ try (var r = JsonReader.of(System.in)) {
 Build with JDK 25 or later: `./mvnw install`. `.sdkmanrc` names the JDK, and the
 library targets Java 25, as geon does. The source is under the
 [Zero-Clause BSD](LICENSE) license.
+
+## Untrusted JSON
+
+Without limits, a reader trusts its input: right for your own backups and dumps,
+wrong for a request body, a webhook, or anything else a stranger can write. There,
+**set the limits, for security**. A few hostile bytes can otherwise cost minutes of
+CPU or all the memory there is.
+
+```java
+try (var r = JsonReader.of(body).maxNumberLength(1000).maxStringLength(1_000_000)) {
+	Object value = r.readValue();
+}
+```
+
+| Limit | Default | Guards against | Suggested |
+|---|---|---|---|
+| `maxNumberLength(int)`, in characters | none | time: the JDK's `BigInteger` and `BigDecimal` parse in time that grows with the square of a number's length, so `readValue` or `nextBigDecimal` on a number of a million digits takes about 12 seconds, and so ten million about 20 minutes | 1000 (Jackson's default) |
+| `maxStringLength(int)`, in UTF-8 bytes once unescaped, names included | none | memory: one string as long as a stream goes on | what your data needs; 1 MB is generous for most fields |
+| Nesting | always 1000 (`JsonReader.MAX_DEPTH`) | the stack | |
+| The input as a whole | yours to set | memory: a tree of many small values | an HTTP server's request body limit, or a bounded `InputStream` |
+
+The limits are set on each reader, never through a global or a system property, so
+one part of a program can't loosen them for another, and the backups can still read
+anything. Both stop reading at the limit, so a hostile value is never buffered
+whole. A refused number stays next; after a refused string, stop reading.
+
+`skipValue` and `readRaw` don't read the strings and numbers they pass over, so the
+limits don't apply to them. Skipping takes no memory, but `readRaw` keeps the whole
+value, so bound the input before using it on untrusted JSON. `Json.read` sets no
+limits: use a `JsonReader` for untrusted JSON.
 
 ## Publishing
 
@@ -215,7 +245,7 @@ What testing found:
 | dsl-json 2 | yes | yes | ~500 KB | | fast; untyped `Object` and the runtime are awkward |
 | fastjson2, Apache Fory JSON | **no** | | | | measured only as a ceiling |
 | Gson `JsonReader` | yes | yes | ~310 KB | | reads `char`s through a `Reader`; slower on bytes |
-| this | yes | yes | 30 KB | nesting depth (1000); number length, per reader, if asked | about 2,250 lines with their docs, and 2,000 of tests; we own it |
+| this | yes | yes | 30 KB | nesting depth (1000); number and string length, per reader, if asked | about 2,250 lines with their docs, and 2,000 of tests; we own it |
 
 If writing our own isn't wanted, Jackson 3's `jackson-core` with a small tree adapter
 is the stable choice.

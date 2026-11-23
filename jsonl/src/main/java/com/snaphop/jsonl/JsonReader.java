@@ -29,9 +29,9 @@ import org.jspecify.annotations.Nullable;
 /// }
 /// ```
 ///
-/// Nothing is limited but nesting ([#MAX_DEPTH]), and numbers if
-/// [#maxNumberLength(int)] says so: a string or a raw value may be as large as memory
-/// allows. The buffer grows only while one token is longer than it,
+/// Nothing is limited but nesting ([#MAX_DEPTH]) unless asked: a string or a raw value
+/// may be as large as memory allows. For JSON nobody vouches for, set
+/// [#maxNumberLength(int)] and [#maxStringLength(int)], and bound the input as a whole. The buffer grows only while one token is longer than it,
 /// and a token may start and end anywhere in the stream.
 ///
 /// Invalid UTF-8 inside strings becomes U+FFFD, as [String#String(byte[],
@@ -157,6 +157,8 @@ public final class JsonReader implements AutoCloseable {
 
 	private int maxNumberLength = Integer.MAX_VALUE;
 
+	private int maxStringLength = Integer.MAX_VALUE;
+
 	private JsonReader(@Nullable InputStream in, byte[] buf, int pos, int limit) {
 		this.in = in;
 		this.buf = buf;
@@ -212,18 +214,19 @@ public final class JsonReader implements AutoCloseable {
 	}
 
 	/// Refuses, from now on, to read a number longer than `length` characters (its sign,
-	/// point and exponent included), with a [JsonException] that leaves it next. There is
-	/// no limit unless this is called.
+	/// point and exponent included), with a [JsonException] that leaves it next. Reading
+	/// stops at the limit, so a longer number isn't buffered whole. There is no limit
+	/// unless this is called.
 	///
-	/// For JSON nobody vouches for. The JDK's `BigInteger` and `BigDecimal` take time
-	/// that grows with the square of a number's length: about 12 seconds for a million
-	/// digits. [#readValue()] reads a whole number past a `long` with `BigInteger`, and
-	/// [#nextBigDecimal()] reads any number with `BigDecimal`. 1000, as Jackson allows,
-	/// is plenty for any real number. [#skipValue()] and [#readRaw()] don't read the
-	/// numbers they pass over, so they don't check this.
+	/// For JSON nobody vouches for, as is [#maxStringLength(int)]. The JDK's `BigInteger`
+	/// and `BigDecimal` take time that grows with the square of a number's length: about
+	/// 12 seconds for a million digits. [#readValue()] reads a whole number past a `long`
+	/// with `BigInteger`, and [#nextBigDecimal()] reads any number with `BigDecimal`.
+	/// 1000, as Jackson allows, is plenty for any real number. [#skipValue()] and
+	/// [#readRaw()] don't read the numbers they pass over, so they don't check this.
 	///
 	/// ```
-	/// try (var r = JsonReader.of(request).maxNumberLength(1000)) {
+	/// try (var r = JsonReader.of(request).maxNumberLength(1000).maxStringLength(1_000_000)) {
 	///     Object body = r.readValue();
 	/// }
 	/// ```
@@ -234,6 +237,26 @@ public final class JsonReader implements AutoCloseable {
 			throw new IllegalArgumentException("maxNumberLength " + length + " is under 1");
 		}
 		this.maxNumberLength = length;
+		return this;
+	}
+
+	/// Refuses, from now on, to read a string or a name longer than `length` bytes of
+	/// UTF-8 once unescaped, with a [JsonException]. Reading stops at the limit, so a
+	/// longer string isn't buffered whole; don't read on after it. There is no limit
+	/// unless this is called.
+	///
+	/// For JSON nobody vouches for, from a stream with no end that bounds it, such as
+	/// JSON lines: without it, one string can take all the memory there is. A limit on
+	/// the input as a whole (an HTTP server's on a request body) bounds strings too.
+	/// [#skipValue()] and [#readRaw()] don't read the strings they pass over, so they
+	/// don't check this. Skipping needs no memory; [#readRaw()] keeps the whole value.
+	/// @param length the most bytes a string or name may have, at least 1.
+	/// @return this reader.
+	public JsonReader maxStringLength(int length) {
+		if (length < 1) {
+			throw new IllegalArgumentException("maxStringLength " + length + " is under 1");
+		}
+		this.maxStringLength = length;
 		return this;
 	}
 
@@ -448,7 +471,7 @@ public final class JsonReader implements AutoCloseable {
 				skipValue();
 			}
 			case P_STRING -> skipString();
-			case P_NUMBER -> pos = numberEnd();
+			case P_NUMBER -> pos = numberEnd(Integer.MAX_VALUE);
 			case P_TRUE, P_FALSE, P_NULL -> {
 			}
 			default -> {
@@ -815,6 +838,10 @@ public final class JsonReader implements AutoCloseable {
 		int i = start;
 		while (true) {
 			i = scanString(buf, i, limit);
+			if (i - start > maxStringLength) {
+				pos = start;
+				throw stringTooLong(name);
+			}
 			if (i < limit) {
 				byte c = buf[i];
 				if (c == '"') {
@@ -824,7 +851,7 @@ public final class JsonReader implements AutoCloseable {
 				}
 				if (c == '\\') {
 					pos = i;
-					return readEscaped(start);
+					return readEscaped(start, name);
 				}
 				pos = i;
 				throw error("Unescaped control character in a string");
@@ -841,7 +868,7 @@ public final class JsonReader implements AutoCloseable {
 	}
 
 	/// Finishes a string from [#pos], at a backslash, given where it started.
-	private String readEscaped(int start) {
+	private String readEscaped(int start, boolean name) {
 		int n = pos - start;
 		byte[] out = scratch;
 		if (out.length < n + 16) {
@@ -863,6 +890,9 @@ public final class JsonReader implements AutoCloseable {
 				System.arraycopy(b, p, out, n, run);
 				n += run;
 				pos = p += run;
+				if (n > maxStringLength) {
+					throw stringTooLong(name);
+				}
 				if (p == lim) {
 					continue;
 				}
@@ -881,7 +911,14 @@ public final class JsonReader implements AutoCloseable {
 				throw error("Unescaped control character in a string");
 			}
 			n = unescape(out, n);
+			if (n > maxStringLength) {
+				throw stringTooLong(name);
+			}
 		}
+	}
+
+	private JsonException stringTooLong(boolean name) {
+		return error((name ? "A name" : "A string") + " is longer than the limit of " + maxStringLength + " bytes");
 	}
 
 	/// Decodes the escape after a backslash into `out` at `n`, which has room for 4.
@@ -1058,7 +1095,7 @@ public final class JsonReader implements AutoCloseable {
 			}
 			case P_NUMBER -> {
 				mark = pos;
-				pos = numberEnd();
+				pos = numberEnd(Integer.MAX_VALUE);
 			}
 			case P_TRUE, P_FALSE, P_NULL -> {
 				return -p;
@@ -1078,8 +1115,8 @@ public final class JsonReader implements AutoCloseable {
 	}
 
 	/// The end of the number at [#pos], which stays put. The number is in the buffer
-	/// whole.
-	private int numberEnd() {
+	/// whole, or, if it's longer than `cap`, more than `cap` of it.
+	private int numberEnd(int cap) {
 		int p = pos;
 		while (true) {
 			byte[] b = buf;
@@ -1087,7 +1124,7 @@ public final class JsonReader implements AutoCloseable {
 			while (p < lim && isNumberByte(b[p])) {
 				p++;
 			}
-			if (p < lim) {
+			if (p < lim || p - pos > cap) {
 				return p;
 			}
 			int scanned = p - pos;
@@ -1106,15 +1143,23 @@ public final class JsonReader implements AutoCloseable {
 	private int number() {
 		int end = scanNumber(pos, limit, eof);
 		if (end < 0) {
-			int whole = numberEnd();
-			end = scanNumber(pos, whole, true);
+			end = numberEnd(maxNumberLength);
+			if (end - pos <= maxNumberLength) {
+				end = scanNumber(pos, end, true);
+			}
 		}
 		if (end - pos > maxNumberLength) {
 			peeked = P_NUMBER;
-			throw error("Number " + numberText(pos, end) + " is longer than the limit of " + maxNumberLength
-					+ " characters");
+			throw numberTooLong();
 		}
 		return end;
+	}
+
+	/// An error for the number at [#pos], which has more than [#maxNumberLength] bytes
+	/// in the buffer.
+	private JsonException numberTooLong() {
+		return error("Number " + new String(buf, pos, Math.min(maxNumberLength, MAX_NUMBER_IN_MESSAGE),
+				StandardCharsets.ISO_8859_1) + "... is longer than the limit of " + maxNumberLength + " characters");
 	}
 
 	/// Checks the number from `start` and sets the `num` fields. Returns its end, or -1
@@ -1212,7 +1257,10 @@ public final class JsonReader implements AutoCloseable {
 	/// An error naming the whole of the bad number at `start`.
 	private JsonException badNumber(int start) {
 		pos = start;
-		int end = numberEnd();
+		int end = numberEnd(maxNumberLength);
+		if (end - pos > maxNumberLength) {
+			return numberTooLong();
+		}
 		return error("Invalid number '" + numberText(pos, end) + "'");
 	}
 
