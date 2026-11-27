@@ -191,7 +191,7 @@ Where the two differ (checked with avaje 3.16):
 
 ## Testing
 
-`./mvnw install` runs 373 tests in about 5 seconds:
+`./mvnw install` runs 388 tests in about 5 seconds:
 
 * **Conformance**: every [JSONTestSuite](https://github.com/nst/JSONTestSuite) case,
   from bytes and one byte at a time.
@@ -209,6 +209,12 @@ Where the two differ (checked with avaje 3.16):
   - random mixes of the pull API, `readRaw` and `skipValue` must agree with the
     tree;
   - number text must agree with `BigDecimal`, `Double.parseDouble` and `long`.
+
+  - properties of any generated document (`PropertyTest`): indenting changes only
+    whitespace outside strings; values written as JSON lines are one compact line
+    each and read back in order, from bytes and chunked streams; `maxStringLength`
+    and `maxNumberLength` refuse exactly the documents with a string or number past
+    them; and an error's line and column are where its offset is.
 
   `-Dfuzz.iterations=200000` runs 1.4 million cases in about a minute. Runs with
   three different seeds were clean, apart from where Jackson is lenient (it takes a
